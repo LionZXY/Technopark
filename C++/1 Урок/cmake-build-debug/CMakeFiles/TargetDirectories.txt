@@ -1,0 +1,3 @@
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/cmake-build-debug/CMakeFiles/1_.dir

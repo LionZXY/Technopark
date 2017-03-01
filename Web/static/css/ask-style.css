@@ -21,6 +21,7 @@ header > .navbar {
 }
 
 .form-search {
+    width: 100%;
 }
 
 .search > .input-group {
