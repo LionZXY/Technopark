@@ -5,143 +5,146 @@
 
 #define BUFFERSIZE 32
 
-bool has_error = false;
-
 char parseToNextValue(double *value);
 
-double calculateAndReturn(char operationCode, double var);
+double calculateAndReturn(char operationCode, double result, double var);
 
-double minus(double var);
+double multiple(char *lastChar, double tmpVar);
 
-double devided(double var);
+double highPrior();
+
+void error();
 
 int main() {
-    char tmpCh, lastChar = '+';
-    double tmpVar;
-    double result = 0;
-    while ((tmpCh = parseToNextValue(&tmpVar)) != '\0') {
-        switch (tmpCh) {
-            case '+':
-            case '-':
-
-        }
+    char tmpCh = '+', lastChar;
+    double tmpVar = 0, result = 0;
+    do {
         lastChar = tmpCh;
-    }
+        tmpCh = parseToNextValue(&tmpVar);
+        if (lastChar != '(')
+            switch (tmpCh) {
+                default:
+                case '+':
+                case '-':
+                    result = calculateAndReturn(lastChar, result, tmpVar);
+                    break;
+                case '*':
+                case '/':
+                    result = calculateAndReturn(lastChar, result, multiple(&tmpCh, tmpVar));
+                    break;
+                case '(':
+                    tmpVar = highPrior();
+                    result = calculateAndReturn(lastChar, result, tmpVar);
+                    break;
+            }
+    } while (tmpCh > 0);
+
+    printf("%0.2lf", result);
     return 0;
 }
 
-double plus(double var) {
-    double tmpVar = 0;
-    char tmpChar = parseToNextValue(&tmpVar);
-    switch (tmpChar) {
-        case '+':
-            return plus(var + tmpVar);
-        case '-':
-            return minus(var + tmpVar);
-        default:
-            return var + calculateAndReturn(tmpChar, tmpVar);
-    }
+
+double multiple(char *tmpCh, double tmpVar) {
+    char lastChar;
+    double result = tmpVar;
+    do {
+        lastChar = *tmpCh;
+        *tmpCh = parseToNextValue(&tmpVar);
+        switch (*tmpCh) {
+            default:
+            case '+':
+            case '-':
+                result = calculateAndReturn(lastChar, result, tmpVar);
+                return result;
+            case '*':
+            case '/':
+                result = calculateAndReturn(lastChar, result, tmpVar);
+                break;
+            case '(':
+                tmpVar = highPrior();
+                result = calculateAndReturn(lastChar, result, tmpVar);
+                break;
+        }
+    } while (tmpCh > 0);
+    return result;
 }
 
-double minus(double var) {
-    double tmpVar = 0;
-    char tmpChar = parseToNextValue(&tmpVar);
-    switch (tmpChar) {
-        case '+':
-            return plus(var - tmpVar);
-        case '-':
-            return minus(var - tmpVar);
-        default:
-            return var - calculateAndReturn(tmpChar, tmpVar);
-    }
-}
-
-double multiple(double var) {
-    double tmpVar = 0;
-    char tmpChar = parseToNextValue(&tmpVar);
-    switch (tmpChar) {
-        case '+':
-            return plus(var * tmpVar);
-        case '-':
-            return minus(var * tmpVar);
-        case '*':
-            return multiple(var * tmpVar);
-        case '/':
-        case '\\':
-            return devided(var * tmpVar);
-        default:
-            return var * calculateAndReturn(tmpChar, tmpVar);
-    }
-}
-
-double devided(double var) {
-    double tmpVar = 0;
-    char tmpChar = parseToNextValue(&tmpVar);
-    switch (tmpChar) {
-        case '+':
-            return plus(var / tmpVar);
-        case '-':
-            return minus(var / tmpVar);
-        case '*':
-            return multiple(var / tmpVar);
-        case '/':
-        case '\\':
-            return devided(var / tmpVar);
-        default:
-            return var / calculateAndReturn(tmpChar, tmpVar);
-    }
-}
-
-double highPrior(double var) {
-    double tmpVar = 0, tmpVar2 = 0;
-    char tmpCh = parseToNextValue(&tmpVar);
-    tmpVar = calculateAndReturn(parseToNextValue(&tmpVar2), calculateAndReturn(tmpCh, tmpVar));
-    if (tmpVar2 != 0)
-        has_error = true;
-    return tmpVar;
+double highPrior() {
+    char lastChar, tmpCh = '+';
+    double tmpVar;
+    double result = 0;
+    do {
+        lastChar = tmpCh;
+        tmpCh = parseToNextValue(&tmpVar);
+        switch (tmpCh) {
+            default:
+            case '+':
+            case '-':
+                result = calculateAndReturn(lastChar, result, tmpVar);
+                break;
+            case '*':
+            case '/':
+                result = calculateAndReturn(lastChar, result, multiple(&tmpCh, tmpVar));
+                break;
+            case '(':
+                tmpVar = highPrior();
+                result = calculateAndReturn(lastChar, result, tmpVar);
+                break;
+            case ')':
+                result = calculateAndReturn(lastChar, result, tmpVar);
+                return result;
+        }
+        if (tmpCh == ')') {
+            return result;
+        }
+    } while (tmpCh > 0);
+    return result;
 }
 
 double calculateAndReturn(char operationCode, double result, double var) {
     switch (operationCode) {
         case '+':
-            return var + resultc;
+            return result + var;
         case '-':
-            return minus(var);
+            return result + var;
         case '*':
-            return multiple(var);
+            return result * var;
         case '\\':
         case '/':
-            return devided(var);
-        case '(':
-            return highPrior(var);
-        case ')':
-            return var;
+            return result / var;
         default:
-            return var;
+            return result;
     }
 }
 
 char parseToNextValue(double *value) {
-    char wordBuffer[BUFFERSIZE], tmpChar;
+    char wordBuffer[BUFFERSIZE];
     int thisPos = 0;
+    int ch;
     bool pointExist = false;
-
-    while (read(STDIN_FILENO, &tmpChar, 1) > 0) {
-        if (tmpChar >= '0' && tmpChar <= '9')
-            wordBuffer[thisPos++] = tmpChar;
-        else if (tmpChar == '.') {
+    while ((ch = getchar()) != EOF && ch != EOF) {
+        if (ch >= '0' && ch <= '9')
+            wordBuffer[thisPos++] = (char) ch;
+        else if (ch == '.') {
             if (pointExist) {
-                has_error = true; //Возможна только одна точка
+                error(); //Возможна только одна точка
                 return 0;
             }
-            wordBuffer[thisPos++] = tmpChar;
+            wordBuffer[thisPos++] = (char) ch;
             pointExist = true;
         } else {
-            wordBuffer[thisPos] = '\0';
-            sscanf(wordBuffer, "%lf", value);
-            return tmpChar;
+            if (thisPos > 0) {
+                wordBuffer[thisPos] = '\0';
+                sscanf(wordBuffer, "%lf", value);
+            }
+            return (char) (ch == '\n' ? 0 : ch);
         }
     }
+
     return 0;
 }
 
+void error() {
+    printf("[error]");
+    exit(0);
+}
