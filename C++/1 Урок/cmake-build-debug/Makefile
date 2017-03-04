@@ -123,6 +123,33 @@ depend:
 	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/build
 .PHONY : 1_/fast
 
+A.o: A.c.o
+
+.PHONY : A.o
+
+# target to build an object file
+A.c.o:
+	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/A.c.o
+.PHONY : A.c.o
+
+A.i: A.c.i
+
+.PHONY : A.i
+
+# target to preprocess a source file
+A.c.i:
+	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/A.c.i
+.PHONY : A.c.i
+
+A.s: A.c.s
+
+.PHONY : A.s
+
+# target to generate assembly for a file
+A.c.s:
+	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/A.c.s
+.PHONY : A.c.s
+
 B.o: B.c.o
 
 .PHONY : B.o
@@ -159,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... 1_"
+	@echo "... A.o"
+	@echo "... A.i"
+	@echo "... A.s"
 	@echo "... B.o"
 	@echo "... B.i"
 	@echo "... B.s"

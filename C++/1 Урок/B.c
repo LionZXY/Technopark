@@ -1,104 +1,147 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <zconf.h>
 
 #define BUFFERSIZE 32
 
-char parseToNextValue(double *value);
-
 double calculateAndReturn(char operationCode, double result, double var);
-
-double multiple(char *lastChar, double tmpVar);
-
-double highPrior();
-
-void error();
+int parseToNextValue(double *value, char *nextOperation);
+int highPrior(double *result);
+int multiple(char *tmpCh, double tmpVar, double *result);
+int start(double *result);
 
 int main() {
-    char tmpCh = '+', lastChar;
-    double tmpVar = 0, result = 0;
-    do {
-        lastChar = tmpCh;
-        tmpCh = parseToNextValue(&tmpVar);
-        if (lastChar != '(')
-            switch (tmpCh) {
-                default:
-                case '+':
-                case '-':
-                    result = calculateAndReturn(lastChar, result, tmpVar);
-                    break;
-                case '*':
-                case '/':
-                    result = calculateAndReturn(lastChar, result, multiple(&tmpCh, tmpVar));
-                    break;
-                case '(':
-                    tmpVar = highPrior();
-                    result = calculateAndReturn(lastChar, result, tmpVar);
-                    break;
-            }
-    } while (tmpCh > 0);
+    double result = 0;
+    if (start(&result) < 0)
+        printf("[error]");
+    else printf("%0.2lf", result);
+    return 0;
+}
 
-    printf("%0.2lf", result);
+int start(double *result) {
+    char tmpCh = '+', lastChar = ' ';
+    double tmpVar = 0;
+    bool expectOperation = false;
+    do {
+        double tmpReturnVar = 0;
+        lastChar = tmpCh;
+        tmpReturnVar = parseToNextValue(&tmpVar, &tmpCh);
+        if (tmpReturnVar > 0)
+            expectOperation = true;
+        else if (tmpReturnVar < 0)
+            return -1;
+        else expectOperation = false;
+        switch (tmpCh) {
+            case '+':
+            case '-':
+                *result = calculateAndReturn(lastChar, *result, tmpVar);
+                break;
+            case '*':
+            case '/':
+                if (multiple(&tmpCh, tmpVar, &tmpReturnVar) < 0)
+                    return -1;
+                *result = calculateAndReturn(lastChar, *result, tmpReturnVar);
+                break;
+            case '(':
+                if (expectOperation)
+                    return -1;
+                if (highPrior(&tmpReturnVar) < 0)
+                    return -1;
+                tmpVar = tmpReturnVar;
+                *result = calculateAndReturn(lastChar, *result, tmpVar);
+                expectOperation = true;
+                break;
+            case ')':
+                return -1;
+            default:
+                *result = calculateAndReturn(lastChar, *result, tmpVar);
+                break;
+        }
+    } while (tmpCh != 0);
     return 0;
 }
 
 
-double multiple(char *tmpCh, double tmpVar) {
-    char lastChar;
-    double result = tmpVar;
+int multiple(char *tmpCh, double tmpVar, double *result) {
+    char lastChar = ' ';
+    *result = tmpVar;
+    bool expectOperation = false;
+    double tmpReturningVar = 0;
     do {
         lastChar = *tmpCh;
-        *tmpCh = parseToNextValue(&tmpVar);
+        tmpReturningVar = parseToNextValue(&tmpVar, tmpCh);
+        if (tmpReturningVar > 0)
+            expectOperation = true;
+        else if (tmpReturningVar < 0)
+            return -1;
+        else expectOperation = false;
         switch (*tmpCh) {
             default:
             case '+':
             case '-':
-                result = calculateAndReturn(lastChar, result, tmpVar);
-                return result;
+                *result = calculateAndReturn(lastChar, *result, tmpVar);
+                return 0;
             case '*':
             case '/':
-                result = calculateAndReturn(lastChar, result, tmpVar);
-                break;
+                *result = calculateAndReturn(lastChar, *result, tmpVar);
+                return 0;
             case '(':
-                tmpVar = highPrior();
-                result = calculateAndReturn(lastChar, result, tmpVar);
+                if (expectOperation)
+                    return -1;
+                if (highPrior(&tmpReturningVar))
+                    return -1;
+                *result = calculateAndReturn(lastChar, *result, tmpReturningVar);
+                tmpVar = *result;
                 break;
         }
     } while (tmpCh > 0);
-    return result;
+    return -1;
 }
 
-double highPrior() {
-    char lastChar, tmpCh = '+';
-    double tmpVar;
-    double result = 0;
+int highPrior(double *result) {
+    char lastChar = ' ', tmpCh = '+';
+    double tmpVar = 0;
+    double tmpReturningVar = 0;
+    *result = 0;
+    bool expectOperation = false;
     do {
         lastChar = tmpCh;
-        tmpCh = parseToNextValue(&tmpVar);
+        tmpReturningVar = parseToNextValue(&tmpVar, &tmpCh);
+        if (tmpReturningVar > 0)
+            expectOperation = true;
+        else if (tmpReturningVar < 0)
+            return -1;
+        else expectOperation = false;
+
         switch (tmpCh) {
             default:
             case '+':
             case '-':
-                result = calculateAndReturn(lastChar, result, tmpVar);
+                *result = calculateAndReturn(lastChar, *result, tmpVar);
                 break;
             case '*':
             case '/':
-                result = calculateAndReturn(lastChar, result, multiple(&tmpCh, tmpVar));
+                if (multiple(&tmpCh, tmpVar, &tmpReturningVar) < 0)
+                    return -1;
+                *result = calculateAndReturn(lastChar, *result, tmpReturningVar);
                 break;
             case '(':
-                tmpVar = highPrior();
-                result = calculateAndReturn(lastChar, result, tmpVar);
+                if (expectOperation)
+                    return -1;
+                if (highPrior(&tmpReturningVar) < 0)
+                    return -1;
+                *result = calculateAndReturn(lastChar, *result, tmpReturningVar);
+                tmpVar = *result;
                 break;
             case ')':
-                result = calculateAndReturn(lastChar, result, tmpVar);
-                return result;
+                *result = calculateAndReturn(lastChar, *result, tmpVar);
+                return 0;
         }
         if (tmpCh == ')') {
-            return result;
+            return 0;
         }
     } while (tmpCh > 0);
-    return result;
+    return -1;
 }
 
 double calculateAndReturn(char operationCode, double result, double var) {
@@ -106,45 +149,45 @@ double calculateAndReturn(char operationCode, double result, double var) {
         case '+':
             return result + var;
         case '-':
-            return result + var;
+            return result - var;
         case '*':
             return result * var;
-        case '\\':
         case '/':
             return result / var;
         default:
-            return result;
+            return var;
     }
 }
 
-char parseToNextValue(double *value) {
-    char wordBuffer[BUFFERSIZE];
+int parseToNextValue(double *value, char *nextOperation) {
+    char wordBuffer[BUFFERSIZE] = {0};
     int thisPos = 0;
-    int ch;
+    int ch = 0;
     bool pointExist = false;
     while ((ch = getchar()) != EOF && ch != EOF) {
         if (ch >= '0' && ch <= '9')
             wordBuffer[thisPos++] = (char) ch;
         else if (ch == '.') {
             if (pointExist) {
-                error(); //Возможна только одна точка
-                return 0;
+                return -1; //Возможна только одна точка
             }
             wordBuffer[thisPos++] = (char) ch;
             pointExist = true;
-        } else {
+        } else if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '(' || ch == ')' || ch == '\n') {
             if (thisPos > 0) {
                 wordBuffer[thisPos] = '\0';
-                sscanf(wordBuffer, "%lf", value);
+                if (sscanf(wordBuffer, "%lf", value) < 0)
+                    return -1;
             }
-            return (char) (ch == '\n' ? 0 : ch);
-        }
+            *nextOperation = (char) (ch == '\n' ? 0 : ch);
+            return thisPos;
+        } else if (ch != ' ')
+            return -1;
     }
-
+    if (thisPos > 0) {
+        wordBuffer[thisPos] = '\0';
+        sscanf(wordBuffer, "%lf", value);
+    }
+    *nextOperation = 0;
     return 0;
-}
-
-void error() {
-    printf("[error]");
-    exit(0);
 }

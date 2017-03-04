@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/C14Test.dir/main.cpp.o  -o C14Test 
