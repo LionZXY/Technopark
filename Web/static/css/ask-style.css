@@ -1,0 +1,41 @@
+.navbar-brand {
+    display: inline-block;
+    box-sizing: content-box;
+    height: 35px;
+}
+.navbar-brand img {
+    height: 100%;
+}
+.user-block > a {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.user-block > a > img {
+    height: 35px;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+
+.user-block > ul {
+    width: 100% !important;
+    text-align: center;
+}
+
+.search {
+    margin: 0;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.tags .label {
+    font-size: 18px;
+    margin: 5px;
+}
+
+.crown {
+    display: inline-block;
+    height: 20px;
+    margin-top: -6px;
+}
