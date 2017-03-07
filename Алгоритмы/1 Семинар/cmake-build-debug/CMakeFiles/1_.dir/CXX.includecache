@@ -6,11 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/main.cpp
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/1_2.cpp
 iostream
 -
 assert.h
 -
 cmath
 -
+
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/main.cpp
 
