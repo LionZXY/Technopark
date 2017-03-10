@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Выше 3 Мета-теги ** должны прийти в первую очередь в голове; любой другой руководитель контент *после* эти теги -->
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <link href="static/css/ask-style.css?<?php echo time(); ?>" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    <!-- HTML5 Shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- Предупреждение: Respond.js не работает при просмотре страницы через файл:// -->
+</head>
+
+<body>
+<div class="container">
+    <header class="row">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="static/image/logo.png">
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <form class="search navbar-form navbar-left" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="Search for...">
+                            <span class="input-group-btn">
+                           <button class="btn btn-default" type="button">Go!</button>
+                           </span>
+                        </div>
+                        <!-- /input-group -->
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="ask-question"><a href="/add.html">Задать вопрос</a></li>
+                        <li class="user-block dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                <img alt="User image" src="static/image/ava.png"> Никита Куликов<span
+                                    class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/user/settings.html">Settings</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Log out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+    <div class="row">
+        <div class="col-md-9">
+            <h1>Новый вопрос</h1>
+            <table cols="2" class="input-group row ask-form" align="left">
+                <tr>
+                    <td class="col-md-3">Вопрос:</td>
+                    <td class="col-md-9"><input type="text" class="form-control" placeholder="Введите вопрос"
+                                                aria-describedby="basic-addon2"></td>
+                </tr>
+                <tr>
+                    <td class="col-md-3">Текст вопроса:</td>
+                    <td class="col-md-9"><textarea rows="6" class="form-control" placeholder="Распишите тут свой вопрос подробнее"
+                                                   aria-describedby="basic-addon2"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="col-md-3">Теги:</td>
+                    <td class="col-md-9"><input type="text" class="form-control" placeholder="Укажите теги через запятую"
+                                                aria-describedby="basic-addon2"></td>
+                </tr>
+                <tr>
+                    <td class="col-md-3"></td>
+                    <td class="col-md-9"><button type="button" class="btn btn-default navbar-btn">Спросить!</button></td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <h1>Теги:</h1>
+                <div class="tags">
+                    <span class="label label-default">Php</span>
+                    <span class="label label-default" style="background-color: red">Java</span>
+                </div>
+            </div>
+            <div>
+                <h1>Лучшие пользователи:</h1>
+                <ul class="best-users list-group">
+                    <li class="list-group-item">
+                        <span class="badge">+14</span> LionZXY <img class="crown" src="static/image/crown.png">
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">+7</span> 00x0
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">-1</span> Luser
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">-14</span> Я
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.js"></script>
+</body>
+
+</html>
