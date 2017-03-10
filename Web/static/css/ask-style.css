@@ -67,6 +67,13 @@
     border: 1px solid #e3e3e3;
 }
 
+@media screen and (max-width: 991px) {
+    .question > .row {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
 /* Вопросы справа */
 .question-right {
     height: 150px;
@@ -111,10 +118,10 @@
 }
 
 .question-author {
-    margin-top: 8px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    margin-bottom: 20px;
+    margin: 8px 5px 20px;
 }
 
 .question-left img {
