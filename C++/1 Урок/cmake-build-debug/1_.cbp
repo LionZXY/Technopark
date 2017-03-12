@@ -87,9 +87,6 @@
 		<Unit filename="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/A.c">
 			<Option target="1_"/>
 		</Unit>
-		<Unit filename="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/B.c">
-			<Option target="1_"/>
-		</Unit>
 		<Unit filename="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -3,5 +3,3 @@
 
 CMakeFiles/1_.dir/A.c.o: ../A.c
 
-CMakeFiles/1_.dir/B.c.o: ../B.c
-

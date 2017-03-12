@@ -1,1 +1,1 @@
-/usr/bin/cc  -g   CMakeFiles/1_.dir/B.c.o CMakeFiles/1_.dir/A.c.o  -o 1_ 
+/usr/bin/cc  -g   CMakeFiles/1_.dir/A.c.o  -o 1_ 

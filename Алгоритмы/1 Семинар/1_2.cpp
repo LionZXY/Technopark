@@ -2,6 +2,18 @@
 #include <assert.h>
 #include <cmath>
 
+/**
+ * Вывести разложение натурального числа n на простые множители. Простые множители должны быть
+ * упорядочены по возрастанию и разделены пробелами.
+ * 2 ≤ n ≤ 10^6
+ *
+ * Пример:
+ * 75
+ * Вывод:
+ * 3 5 5
+ */
+
+
 void getPrimesForDivN(int n, size_t &size, int *&primes);
 
 int main() {
@@ -22,8 +34,8 @@ int main() {
 }
 
 void getPrimesForDivN(int n, size_t &size, int *&returnVar) {
-    int maxN = n / 2 + 1;
-    bool *isPrime = new bool[maxN + 1];
+    const int maxN = n / 2 + 1;
+    const bool *isPrime = new bool[maxN + 1];
     size = 0;
     for (int i = 1; i <= maxN; i += 2)
         isPrime[i] = true;
@@ -56,7 +68,6 @@ void getPrimesForDivN(int n, size_t &size, int *&returnVar) {
                     tmpVarForDeliver = tmpVarForDeliver / i;
                     break;
                 }
-        //printf("%d %d\n", tmpVarForDeliver, isPrime[tmpVarForDeliver]);
     } while (tmpVarForDeliver < maxN && !isPrime[tmpVarForDeliver]);
 
     if (tmpVarForDeliver != 1)

@@ -1,0 +1,52 @@
+/*
+void findRepeat(int *array, size_t arraySize) {
+    // Cделаем n+1 шаг из вершины 0. После этого мы обязательно окажемся в вершине на цикле.
+    int tmpIndex = 0;
+    for (int i = 0; i < arraySize; i++)
+        if (tmpIndex != array[tmpIndex])
+            tmpIndex = array[tmpIndex];
+
+    //Запомним эту вершину и будем продолжать шагать, пока не вернёмся в неё. Тем самым узнаем длину цикла sizeOfCycle
+    int tmpResult = array[tmpIndex];
+    int sizeOfCycle = 0;
+    do {
+        tmpIndex = tmpResult;
+        sizeOfCycle++;
+    } while (array[tmpIndex] != tmpResult);
+
+    for(int i = 0; i < sizeOfCycle; i++)
+        if (tmpIndex != array[tmpIndex])
+            tmpIndex = array[tmpIndex];
+}
+*/
+
+/*
+void getPrimes(int n, int &size, int *&primes) {
+    bool *isPrime = new bool[n + 1];
+    size = 0;
+    for (int i = 0; i < n + 1; i++)
+        isPrime[i] = true;
+
+    // Вычеркиваем непростые числа
+    for (int i = 2; i <= n; i++) {
+        if (isPrime[i]) {
+            for (int j = 2; j <= n; j = i * j) {
+                isPrime[i * j] = false;
+            }
+            size++;
+        }
+    }
+
+    primes = new int[size];
+    int nonFreeIndex = 0;
+    for (int i = 2; i <= n; i++) {
+        if (isPrime[i]) {
+            primes[nonFreeIndex++] = i;
+        }
+    }
+
+    assert(nonFreeIndex <= size);
+    size = nonFreeIndex;
+    delete[] isPrime;
+}
+ */

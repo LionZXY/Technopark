@@ -150,33 +150,6 @@ A.c.s:
 	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/A.c.s
 .PHONY : A.c.s
 
-B.o: B.c.o
-
-.PHONY : B.o
-
-# target to build an object file
-B.c.o:
-	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/B.c.o
-.PHONY : B.c.o
-
-B.i: B.c.i
-
-.PHONY : B.i
-
-# target to preprocess a source file
-B.c.i:
-	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/B.c.i
-.PHONY : B.c.i
-
-B.s: B.c.s
-
-.PHONY : B.s
-
-# target to generate assembly for a file
-B.c.s:
-	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/B.c.s
-.PHONY : B.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +162,6 @@ help:
 	@echo "... A.o"
 	@echo "... A.i"
 	@echo "... A.s"
-	@echo "... B.o"
-	@echo "... B.i"
-	@echo "... B.s"
 .PHONY : help
 
 

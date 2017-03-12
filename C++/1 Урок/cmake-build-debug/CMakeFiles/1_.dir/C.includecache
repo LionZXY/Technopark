@@ -7,18 +7,8 @@
 #IncludeRegexTransform: 
 
 /home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/A.c
-lzma.h
--
 stdio.h
 -
 malloc.h
--
-
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/C++/1 Урок/B.c
-stdio.h
--
-stdlib.h
--
-stdbool.h
 -
 
