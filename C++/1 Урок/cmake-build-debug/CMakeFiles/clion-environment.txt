@@ -1,1 +1,1 @@
-CMake: 3.6.3@/home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/163.13906.4/bin/cmake/bin/cmake
+CMake: 3.6.3@/home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/163.13906.23/bin/cmake/bin/cmake
