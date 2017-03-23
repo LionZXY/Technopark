@@ -24,6 +24,14 @@
  * 8 9 10 32
  * Вывод:
  * 0 0 0 2
+ *
+ * Пример 3:
+ * 5
+ * 1 2 2 2 2
+ * 3
+ * 0 2 2
+ * Вывод:
+ * 0 1 1
  * */
 
 int binarySearch(int n, size_t size, int *&sortedArray);
@@ -71,7 +79,7 @@ int binarySearch(int n, size_t size, int *&sortedArray) {
     int start = 0, end = 0, curPos = 1;
 
     // Бежим степенью двойки до ближайшего значения, больше искомого
-    while (curPos < size && sortedArray[curPos] <= n)
+    while (curPos < size && sortedArray[curPos] < n)
         curPos *= 2;;
     if (curPos > size)
         curPos = (int) size - 1;
@@ -84,11 +92,19 @@ int binarySearch(int n, size_t size, int *&sortedArray) {
     // Стандартный бинарный поиск
     do {
         curPos = (end - start) / 2;
-        if (sortedArray[start + curPos] <= n)
+        if(n > sortedArray[start + curPos])
             start = start + curPos;
         else end = start + curPos;
     } while (end - start > 1);
 
+    /*while (start > -1 && sortedArray[start] - n >= sortedArray[end] - n) {
+        end = start;
+        start = end - 1;
+    }
+
+    if(start == -1)
+        return end;
+*/
     if (end == size)
         return end - 1;
     else if (abs(sortedArray[start] - n) > abs(sortedArray[end] - n))

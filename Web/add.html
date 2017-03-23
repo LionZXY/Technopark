@@ -70,6 +70,9 @@
     <div class="row">
         <div class="col-md-9">
             <h1>Новый вопрос</h1>
+            <div class="alert alert-danger">
+                <strong>Ощибка!111одын!11</strong> Ошибка доступа к базе данных!.
+            </div>
             <table cols="2" class="input-group row ask-form" align="left">
                 <tr>
                     <td class="col-md-3">Вопрос:</td>
@@ -78,17 +81,24 @@
                 </tr>
                 <tr>
                     <td class="col-md-3">Текст вопроса:</td>
-                    <td class="col-md-9"><textarea rows="6" class="form-control" placeholder="Распишите тут свой вопрос подробнее"
-                                                   aria-describedby="basic-addon2"></textarea></td>
+                    <td class="col-md-9">
+                        <div class="has-error"><textarea rows="6" class="form-control"
+                            placeholder="Распишите тут свой вопрос подробнее"
+                            aria-describedby="basic-addon2"></textarea>
+                            <label class="control-label" for="inputError">Вопрос не может быть пустым!</label></div>
+                    </td>
                 </tr>
                 <tr>
                     <td class="col-md-3">Теги:</td>
-                    <td class="col-md-9"><input type="text" class="form-control" placeholder="Укажите теги через запятую"
+                    <td class="col-md-9"><input type="text" class="form-control"
+                                                placeholder="Укажите теги через запятую"
                                                 aria-describedby="basic-addon2"></td>
                 </tr>
                 <tr>
                     <td class="col-md-3"></td>
-                    <td class="col-md-9"><button type="button" class="btn btn-default navbar-btn">Спросить!</button></td>
+                    <td class="col-md-9">
+                        <button type="button" class="btn btn-default navbar-btn">Спросить!</button>
+                    </td>
                 </tr>
 
             </table>

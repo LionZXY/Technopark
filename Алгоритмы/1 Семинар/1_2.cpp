@@ -35,7 +35,7 @@ int main() {
 
 void getPrimesForDivN(int n, size_t &size, int *&returnVar) {
     const int maxN = n / 2 + 1;
-    const bool *isPrime = new bool[maxN + 1];
+    bool *isPrime = new bool[maxN + 1];
     size = 0;
     for (int i = 1; i <= maxN; i += 2)
         isPrime[i] = true;

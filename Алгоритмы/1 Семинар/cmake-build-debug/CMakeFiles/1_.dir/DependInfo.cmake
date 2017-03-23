@@ -4,9 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/3_4.cpp" "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles/1_.dir/3_4.cpp.o"
-  "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/4_2.cpp" "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles/1_.dir/4_2.cpp.o"
-  "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/main.cpp" "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles/1_.dir/main.cpp.o"
+  "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/5_3.cpp" "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles/1_.dir/5_3.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

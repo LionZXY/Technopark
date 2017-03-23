@@ -20,6 +20,7 @@
 
 int getSumCount(int needSum, size_t sizeOne, size_t sizeTwo, int *&arrayOne, int *&arrayTwo);
 
+
 int main() {
     //Первый массив
     int sizeOne = -1;
@@ -35,7 +36,7 @@ int main() {
     std::cin >> sizeTwo;
     assert(sizeTwo != -1);
 
-    const int *arrayTwo = new int[sizeTwo];
+    int *arrayTwo = new int[sizeTwo];
     for (int i = 0; i < sizeTwo; i++)
         std::cin >> arrayTwo[i];
 

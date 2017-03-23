@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/163.13906.4/bin/cmake/bin/cmake
+CMAKE_COMMAND = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/163.13906.23/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/163.13906.4/bin/cmake/bin/cmake -E remove -f
+RM = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/163.13906.23/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -57,93 +57,41 @@ include CMakeFiles/1_.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/1_.dir/flags.make
 
-CMakeFiles/1_.dir/main.cpp.o: CMakeFiles/1_.dir/flags.make
-CMakeFiles/1_.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/1_.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/1_.dir/main.cpp.o -c "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/main.cpp"
+CMakeFiles/1_.dir/5_3.cpp.o: CMakeFiles/1_.dir/flags.make
+CMakeFiles/1_.dir/5_3.cpp.o: ../5_3.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/1_.dir/5_3.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/1_.dir/5_3.cpp.o -c "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/5_3.cpp"
 
-CMakeFiles/1_.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/1_.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/main.cpp" > CMakeFiles/1_.dir/main.cpp.i
+CMakeFiles/1_.dir/5_3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/1_.dir/5_3.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/5_3.cpp" > CMakeFiles/1_.dir/5_3.cpp.i
 
-CMakeFiles/1_.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/1_.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/main.cpp" -o CMakeFiles/1_.dir/main.cpp.s
+CMakeFiles/1_.dir/5_3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/1_.dir/5_3.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/5_3.cpp" -o CMakeFiles/1_.dir/5_3.cpp.s
 
-CMakeFiles/1_.dir/main.cpp.o.requires:
+CMakeFiles/1_.dir/5_3.cpp.o.requires:
 
-.PHONY : CMakeFiles/1_.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/1_.dir/5_3.cpp.o.requires
 
-CMakeFiles/1_.dir/main.cpp.o.provides: CMakeFiles/1_.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/1_.dir/main.cpp.o.provides
+CMakeFiles/1_.dir/5_3.cpp.o.provides: CMakeFiles/1_.dir/5_3.cpp.o.requires
+	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/5_3.cpp.o.provides.build
+.PHONY : CMakeFiles/1_.dir/5_3.cpp.o.provides
 
-CMakeFiles/1_.dir/main.cpp.o.provides.build: CMakeFiles/1_.dir/main.cpp.o
-
-
-CMakeFiles/1_.dir/3_4.cpp.o: CMakeFiles/1_.dir/flags.make
-CMakeFiles/1_.dir/3_4.cpp.o: ../3_4.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/1_.dir/3_4.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/1_.dir/3_4.cpp.o -c "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/3_4.cpp"
-
-CMakeFiles/1_.dir/3_4.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/1_.dir/3_4.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/3_4.cpp" > CMakeFiles/1_.dir/3_4.cpp.i
-
-CMakeFiles/1_.dir/3_4.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/1_.dir/3_4.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/3_4.cpp" -o CMakeFiles/1_.dir/3_4.cpp.s
-
-CMakeFiles/1_.dir/3_4.cpp.o.requires:
-
-.PHONY : CMakeFiles/1_.dir/3_4.cpp.o.requires
-
-CMakeFiles/1_.dir/3_4.cpp.o.provides: CMakeFiles/1_.dir/3_4.cpp.o.requires
-	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/3_4.cpp.o.provides.build
-.PHONY : CMakeFiles/1_.dir/3_4.cpp.o.provides
-
-CMakeFiles/1_.dir/3_4.cpp.o.provides.build: CMakeFiles/1_.dir/3_4.cpp.o
-
-
-CMakeFiles/1_.dir/4_2.cpp.o: CMakeFiles/1_.dir/flags.make
-CMakeFiles/1_.dir/4_2.cpp.o: ../4_2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/1_.dir/4_2.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/1_.dir/4_2.cpp.o -c "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/4_2.cpp"
-
-CMakeFiles/1_.dir/4_2.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/1_.dir/4_2.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/4_2.cpp" > CMakeFiles/1_.dir/4_2.cpp.i
-
-CMakeFiles/1_.dir/4_2.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/1_.dir/4_2.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/4_2.cpp" -o CMakeFiles/1_.dir/4_2.cpp.s
-
-CMakeFiles/1_.dir/4_2.cpp.o.requires:
-
-.PHONY : CMakeFiles/1_.dir/4_2.cpp.o.requires
-
-CMakeFiles/1_.dir/4_2.cpp.o.provides: CMakeFiles/1_.dir/4_2.cpp.o.requires
-	$(MAKE) -f CMakeFiles/1_.dir/build.make CMakeFiles/1_.dir/4_2.cpp.o.provides.build
-.PHONY : CMakeFiles/1_.dir/4_2.cpp.o.provides
-
-CMakeFiles/1_.dir/4_2.cpp.o.provides.build: CMakeFiles/1_.dir/4_2.cpp.o
+CMakeFiles/1_.dir/5_3.cpp.o.provides.build: CMakeFiles/1_.dir/5_3.cpp.o
 
 
 # Object files for target 1_
 1__OBJECTS = \
-"CMakeFiles/1_.dir/main.cpp.o" \
-"CMakeFiles/1_.dir/3_4.cpp.o" \
-"CMakeFiles/1_.dir/4_2.cpp.o"
+"CMakeFiles/1_.dir/5_3.cpp.o"
 
 # External object files for target 1_
 1__EXTERNAL_OBJECTS =
 
-1_: CMakeFiles/1_.dir/main.cpp.o
-1_: CMakeFiles/1_.dir/3_4.cpp.o
-1_: CMakeFiles/1_.dir/4_2.cpp.o
+1_: CMakeFiles/1_.dir/5_3.cpp.o
 1_: CMakeFiles/1_.dir/build.make
 1_: CMakeFiles/1_.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable 1_"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable 1_"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/1_.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -151,9 +99,7 @@ CMakeFiles/1_.dir/build: 1_
 
 .PHONY : CMakeFiles/1_.dir/build
 
-CMakeFiles/1_.dir/requires: CMakeFiles/1_.dir/main.cpp.o.requires
-CMakeFiles/1_.dir/requires: CMakeFiles/1_.dir/3_4.cpp.o.requires
-CMakeFiles/1_.dir/requires: CMakeFiles/1_.dir/4_2.cpp.o.requires
+CMakeFiles/1_.dir/requires: CMakeFiles/1_.dir/5_3.cpp.o.requires
 
 .PHONY : CMakeFiles/1_.dir/requires
 
