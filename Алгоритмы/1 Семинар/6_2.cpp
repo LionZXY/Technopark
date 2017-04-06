@@ -35,7 +35,16 @@ class TriangleTableRow {
 public:
     TriangleTableRow(size_t size);
 
+    /**
+     * Not use for create
+     *
+     * @hideinitializer
+     * **/
+    TriangleTableRow();
+
     ~TriangleTableRow();
+
+    TriangleTableRow(const TriangleTableRow &) = delete;
 
     unsigned long operator[](size_t index) const;
 
@@ -58,11 +67,13 @@ class TriangleTable {
 public:
     TriangleTable(size_t size);
 
+    TriangleTable(const TriangleTable &) = delete;
+
     ~TriangleTable();
 
-    const TriangleTableRow operator[](size_t index) const;
+    const TriangleTableRow &operator[](size_t index) const;
 
-    TriangleTableRow operator[](size_t index);
+    TriangleTableRow &operator[](size_t index);
 
     size_t getSize() const;
 
@@ -102,7 +113,6 @@ unsigned long maxPiramidCount(size_t n) {
     }
 
     // Так как таблица инициализированна в стеке, делетить её не надо.
-    //table.~TriangleTable();
     return result;
 }
 
@@ -117,25 +127,25 @@ int main() {
 
 
 //Описание методов классов
+
+
 size_t min(size_t i, size_t i1) {
     return i < i1 ? i : i1;
 }
 
 TriangleTable::TriangleTable(size_t size) : size(size),
                                             data(NULL) {
-    // В данном случае используется маллок, потомучто конструктор у TriangleTableRow не стандартный.
-    // К тому же, все равно, для каждого элемента вызывается конструктор
-    data = (TriangleTableRow *) malloc(sizeof(TriangleTableRow) * size);
+    data = new TriangleTableRow[size];
     for (size_t i = 1; i <= size; i++)
-        data[i - 1] = TriangleTableRow(i);
+        new(data + i - 1) TriangleTableRow(i);
 }
 
-const TriangleTableRow TriangleTable::operator[](size_t index) const {
+const TriangleTableRow &TriangleTable::operator[](size_t index) const {
     assert(index > 0 && index <= size);
     return data[index - 1];
 }
 
-TriangleTableRow TriangleTable::operator[](size_t index) {
+TriangleTableRow &TriangleTable::operator[](size_t index) {
     assert(index > 0 && index <= size);
     return data[index - 1];
 }
@@ -146,11 +156,12 @@ size_t TriangleTable::getSize() const {
 
 TriangleTable::~TriangleTable() {
     delete[] data;
+    assert(true);
 }
 
 TriangleTableRow::TriangleTableRow(size_t size) : size(size), data(NULL) {
     this->size = size;
-    data = (unsigned long *) calloc(size, sizeof(unsigned long));
+    data = new unsigned long[size]{0};
 }
 
 unsigned long TriangleTableRow::operator[](size_t index) const {
@@ -168,6 +179,11 @@ size_t TriangleTableRow::getSize() const {
 }
 
 TriangleTableRow::~TriangleTableRow() {
-    free(data);
+    delete[] data;
 }
+
+TriangleTableRow::TriangleTableRow() {
+    //Nothing
+}
+
 

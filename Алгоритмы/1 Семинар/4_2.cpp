@@ -51,7 +51,7 @@
 class CDeque {
 public:
     CDeque() : headIndex(-1), nodeBuffer(NULL), tailIndex(-1), count(0), bufferSize(BUFFER_SIZE) {
-        nodeBuffer = (CNode *) malloc(sizeof(CNode) * bufferSize);
+        nodeBuffer = new CNode[bufferSize];
     }
 
     ~CDeque() {
@@ -101,11 +101,12 @@ void CDeque::PushBack(int key) {
         int oldBufferSize = bufferSize;
 
         bufferSize += BUFFER_SIZE;
-        nodeBuffer = (CNode *) malloc(sizeof(CNode) * bufferSize);
+        nodeBuffer = new CNode[bufferSize];
 
         //Первым элементом устанавливаем ключ так как мы вызываем PushBack
         nodeBuffer[0].Key = key;
         count++;
+        //TODO переставить на memcpy
         for (int i = headIndex, j = 1; j < count; i++, j++)
             if (i < oldBufferSize)
                 nodeBuffer[j] = oldBuffer[i];
@@ -145,7 +146,7 @@ void CDeque::PushFront(int key) {
         int oldBufferSize = bufferSize;
 
         bufferSize += BUFFER_SIZE;
-        nodeBuffer = (CNode *) malloc(sizeof(CNode) * bufferSize);
+        nodeBuffer = new CNode[bufferSize];
 
         for (int i = headIndex, j = 0; j < count; i++, j++)
             if (i < oldBufferSize)
@@ -160,7 +161,7 @@ void CDeque::PushFront(int key) {
         delete[] oldBuffer;
     }
 
-    if(tailIndex < bufferSize - 1)
+    if (tailIndex < bufferSize - 1)
         tailIndex++;
     else tailIndex = 0;
 
@@ -173,7 +174,7 @@ void CDeque::Zip() {
     bufferSize = count % BUFFER_SIZE + count;
     CNode *oldBuffer = nodeBuffer;
 
-    nodeBuffer = (CNode *) malloc(sizeof(CNode) * bufferSize);
+    nodeBuffer = new CNode[bufferSize];
 
     for (int i = headIndex, j = 0; j < count; i++, j++)
         if (i < oldBufferSize)
@@ -194,7 +195,7 @@ int CDeque::PopBack() {
     count--;
     int result = nodeBuffer[headIndex].Key;
 
-    if(headIndex < bufferSize - 1)
+    if (headIndex < bufferSize - 1)
         headIndex++;
     else headIndex = 0;
 
@@ -214,97 +215,15 @@ int CDeque::PopFront() {
     return result;
 }
 
-void unit_test() {
-    CDeque deque;
-    deque.PushBack(2);
-    deque.PushFront(3);
-    assert(deque.PopBack() == 2);
-
-    deque.PushFront(5);
-    assert(deque.PopBack() == 3);
-
-    deque.PushBack(7);
-    assert(deque.PopFront() == 5);
-
-    assert(deque.PopBack() == 7);
-
-    assert(deque.IsEmpty());
-
-    for (int i = 0; i < 10000; i++)
-        deque.PushFront(i);
-
-    assert(deque.PopBack() == 0);
-    assert(deque.PopFront() == 10000 - 1);
-
-    for (int i = 1; i < 10000 - 1; i++)
-        assert(deque.PopBack() == i);
-
-    assert(deque.IsEmpty());
-
-    for (int i = 0; i < 20000; i++)
-        deque.PushBack(i);
-
-    assert(deque.PopBack() == 20000 - 1);
-    assert(deque.PopFront() == 0);
-
-    int tmp = 0;
-    for (int i = 1; i < 20000 - 1; i++) {
-        tmp = deque.PopFront();
-        assert(tmp == i);
-    }
-
-    assert(deque.IsEmpty());
-    deque.Zip();
-
-    for (int i = 0; i < 30000; i++)
-        if (i % 2 == 0)
-            deque.PushFront(i);
-        else deque.PushBack(i);
-
-    for (int i = 30000 - 1; i > 0; i -= 2)
-        assert(deque.PopBack() == i);
-
-    for (int i = 30000 - 2; i > 0; i -= 2)
-        assert(deque.PopFront() == i);
-
-    assert(deque.PopBack() == 0);
-
-    deque.Zip();
-    assert(deque.IsEmpty());
-
-    deque.PushBack(0);
-    assert(deque.PopFront() == 0);
-    assert(deque.IsEmpty());
-
-    deque.PushBack(4);
-    assert(deque.PopFront() == 4);
-    assert(deque.IsEmpty());
-
-    deque.Zip();
-    assert(deque.IsEmpty());
-
-    deque.PushFront(0);
-    assert(deque.PopBack() == 0);
-    assert(deque.IsEmpty());
-
-    deque.PushFront(4);
-    assert(deque.PopBack() == 4);
-    assert(deque.IsEmpty());
-
-    deque.PushBack(0);
-    deque.PopFront();
-    assert(deque.IsEmpty());
-}
-
 int main() {
-    //unit_test();
-
+    int requestValue = 0;
     int requestsCount = 0;
     std::cin >> requestsCount;
 
     CDeque deque;
     for (int i = 0; i < requestsCount; ++i) {
         int requestType = 0;
+        std::cin >> requestType >> requestValue;
         switch (requestType) {
             case 1:
                 deque.PushFront(requestValue);
@@ -342,10 +261,7 @@ int main() {
             default:
                 assert(false);
         }
-        int requestValue = 0;
-        std::cin >> requestType >> requestValue;
     }
-    delete deque;
     std::cout << "YES";
     return 0;
 }

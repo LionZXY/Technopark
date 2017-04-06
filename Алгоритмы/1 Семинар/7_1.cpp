@@ -1,7 +1,6 @@
 #include <iostream>
-#include <cstdlib>
 #include <assert.h>
-#include <climits>
+#include <cstring>
 
 #define BUFFER_SIZE 16
 
@@ -45,9 +44,9 @@ struct Athlet {
 
 class Stack {
 public:
-    Stack() : bufferSize(BUFFER_SIZE), curIndex(0), count(0) {
-        buffer = (Athlet *) malloc(sizeof(Athlet) * bufferSize);
-    };
+    Stack();
+
+    ~Stack();
 
     int getCount() const { return count; }
 
@@ -67,7 +66,7 @@ private:
     Athlet *buffer;
 };
 
-int getMaxHeightTower(Stack stack) {
+int getMaxHeightTower(Stack &stack) {
     int height = 0;
     int forceNeed = 0;
     Athlet tmpAthlet;
@@ -91,7 +90,7 @@ int getMaxHeightTower(Stack stack) {
 int main() {
     Stack stack;
     Athlet tmpAthlet;
-
+    
     while (std::cin.good() && !std::cin.eof()) {
         std::cin >> tmpAthlet.weight;
         std::cin >> tmpAthlet.force;
@@ -117,12 +116,24 @@ Athlet *Stack::getAsArray() {
 void Stack::Push(Athlet value) {
     if (count == bufferSize) {
         bufferSize += BUFFER_SIZE;
-        buffer = (Athlet *) realloc(buffer, sizeof(Athlet) * bufferSize);
+        size_t oldSize = sizeof(Athlet) * bufferSize;
+        Athlet *oldbuffer = buffer;
+        buffer = new Athlet[bufferSize];
+        memcpy(buffer, oldbuffer, oldSize);
+        delete[] oldbuffer;
     }
 
     count++;
     buffer[curIndex++] = value;
 }
+
+Stack::Stack() : bufferSize(BUFFER_SIZE), curIndex(0), count(0) {
+    buffer = new Athlet[bufferSize];
+}
+
+Stack::~Stack() {
+    delete[] buffer;
+};
 
 template<typename T>
 void qsort(T *array, int start, int end, int (*compare)(T *firstVar, T *twoVar)) {
