@@ -97,14 +97,6 @@ int binarySearch(int n, size_t size, int *&sortedArray) {
         else end = start + curPos;
     } while (end - start > 1);
 
-    /*while (start > -1 && sortedArray[start] - n >= sortedArray[end] - n) {
-        end = start;
-        start = end - 1;
-    }
-
-    if(start == -1)
-        return end;
-*/
     if (end == size)
         return end - 1;
     else if (abs(sortedArray[start] - n) > abs(sortedArray[end] - n))

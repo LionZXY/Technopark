@@ -94,7 +94,7 @@ int main() {
     return 0;
 }
 
-int getMaxFromStack(Stack stack, int level) {
+int getMaxFromStack(Stack &stack, int level) {
     Rectangle tmpRectangle;
     int maxArea = 0;
     int height = INT_MAX;

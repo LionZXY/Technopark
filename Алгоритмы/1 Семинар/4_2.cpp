@@ -305,8 +305,6 @@ int main() {
     CDeque deque;
     for (int i = 0; i < requestsCount; ++i) {
         int requestType = 0;
-        int requestValue = 0;
-        std::cin >> requestType >> requestValue;
         switch (requestType) {
             case 1:
                 deque.PushFront(requestValue);
@@ -344,8 +342,10 @@ int main() {
             default:
                 assert(false);
         }
+        int requestValue = 0;
+        std::cin >> requestType >> requestValue;
     }
-
+    delete deque;
     std::cout << "YES";
     return 0;
 }
