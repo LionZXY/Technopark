@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Привет!</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Hello, World!</h1>
+<h2>Request method: {{ method }}</h2>
+{% if data %}
+    <ul type="circle">
+        {% for key, value in data.items %}
+            <li>
+                {{ key }} = {{ value }}
+            </li>
+        {% empty %}
+            <li>Ничего нет</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+</body>
+</html>

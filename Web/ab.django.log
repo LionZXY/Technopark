@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking django.lionzxy.ru (be patient)
+
+
+Server Software:        nginx/1.10.0
+Server Hostname:        django.lionzxy.ru
+Server Port:            80
+
+Document Path:          /static.html
+Document Length:        127 bytes
+
+Concurrency Level:      10
+Time taken for tests:   1.744 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      323000 bytes
+HTML transferred:       127000 bytes
+Requests per second:    573.56 [#/sec] (mean)
+Time per request:       17.435 [ms] (mean)
+Time per request:       1.744 [ms] (mean, across all concurrent requests)
+Transfer rate:          180.92 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.6      0       6
+Processing:    14   17   3.9     16      46
+Waiting:       14   17   3.9     16      46
+Total:         14   17   4.1     16      46
+
+Percentage of the requests served within a certain time (ms)
+  50%     16
+  66%     17
+  75%     17
+  80%     17
+  90%     20
+  95%     23
+  98%     32
+  99%     44
+ 100%     46 (longest request)

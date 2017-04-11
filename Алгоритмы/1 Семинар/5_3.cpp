@@ -43,28 +43,15 @@ struct Rectangle {
 
 class Stack {
 public:
-    Stack() : bufferSize(BUFFER_SIZE), curIndex(0), count(0) {
-        buffer = (Rectangle *) malloc(sizeof(Rectangle) * bufferSize);
-    };
+    Stack();
+
+    ~Stack();
 
     bool IsEmpty() const { return count == 0; }
 
-    void Push(Rectangle value) {
-        if (count == bufferSize) {
-            bufferSize += BUFFER_SIZE;
-            realloc(buffer, sizeof(Rectangle) * bufferSize);
-        }
+    void Push(Rectangle value);
 
-        count++;
-        buffer[curIndex++] = value;
-    }
-
-    Rectangle Pop() {
-        assert(!IsEmpty());
-
-        count--;
-        return buffer[--curIndex];
-    }
+    Rectangle Pop();
 
 private:
     int curIndex = 0;
@@ -142,4 +129,36 @@ int getMaxArea(int size, Rectangle *array) {
     maxArea = maxArea > tmp ? maxArea : tmp;
 
     return maxArea;
+}
+
+
+
+Stack::Stack() : bufferSize(BUFFER_SIZE), curIndex(0), count(0) {
+    buffer = new Rectangle[bufferSize];
+}
+
+Stack::~Stack() {
+    delete[] buffer;
+}
+
+void Stack::Push(Rectangle value) {
+    if (count == bufferSize) {
+        int oldBuffer = bufferSize;
+        Rectangle *tmp = buffer;
+        bufferSize += BUFFER_SIZE;
+        buffer = new Rectangle[bufferSize];
+        for (int i = 0; i < oldBuffer; i++)
+            buffer[i] = tmp[i];
+        delete[] tmp;
+    }
+
+    count++;
+    buffer[curIndex++] = value;
+}
+
+Rectangle Stack::Pop() {
+    assert(!IsEmpty());
+
+    count--;
+    return buffer[--curIndex];
 }

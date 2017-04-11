@@ -90,7 +90,7 @@ int getMaxHeightTower(Stack &stack) {
 int main() {
     Stack stack;
     Athlet tmpAthlet;
-    
+
     while (std::cin.good() && !std::cin.eof()) {
         std::cin >> tmpAthlet.weight;
         std::cin >> tmpAthlet.force;
