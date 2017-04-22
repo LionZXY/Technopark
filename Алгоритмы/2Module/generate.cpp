@@ -5,23 +5,39 @@
 
 bool readBit(int flags, int num);
 
-int readFlags(int argc, char *argv[]);
+int readFlags(int argc, char *argv[], unsigned int &arraySize);
+
+unsigned int decimalBuffer[10] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000,
+                                  1000000000}; // Чтобы не высчитывать каждый раз степень десятки
+int tmpChar[16] = {0};
+
+void inline printVar(int var) {
+    int pos = 0;
+    while (var != 0) {
+        tmpChar[pos++] = var % 10 + '0';
+        var /= 10;
+    }
+    for (; pos != 0;)
+        putchar_unlocked(tmpChar[--pos]);
+    putchar_unlocked(' ');
+}
 
 int main(int argc, char *argv[]) {
-    int flags = readFlags(argc, argv);
-
     srand(time(NULL));
     unsigned int maxValue = (unsigned int) std::pow((long double) 10, 9); // Максимальное значение элемента
     unsigned int maxSizeDataset = (unsigned int) (std::pow((long double) 10, 7) * 2.5); // Максимальный размер массива
-    unsigned int arraySize = maxSizeDataset;
-    if (!readBit(flags, 0))
-        arraySize = (unsigned int) abs(rand() % maxSizeDataset);
+    unsigned int arraySize = 0;
+    int flags = readFlags(argc, argv, arraySize);
+    if (arraySize == 0)
+        if (!readBit(flags, 0))
+            arraySize = (unsigned int) abs(rand() % maxSizeDataset);
+        else arraySize = maxSizeDataset;
     arraySize = arraySize - arraySize % 10; // Размер массива должен быть кратен 10
 
     if (readBit(flags, 2)) {
         int randVar = abs(rand() % maxValue);
         for (unsigned int i = 0; i < arraySize; i++) {
-            printf("%d ", randVar);
+            printVar(randVar);
         }
     } else if (readBit(flags, 1)) {
         double chanceForVar = 0.9;
@@ -36,18 +52,18 @@ int main(int argc, char *argv[]) {
 
         for (unsigned int i = 0; i < arraySize; i++) {
             if (i != startPos)
-                printf("%d ", abs(rand() % maxValue));
+                printVar(abs(rand() % maxValue));
             else
                 for (unsigned int j = 0; j < maxCountVar && i < arraySize; i++) {
                     if (abs(rand() % 100) < chanceForVar * 100) {
                         j++;
-                        printf("%d ", randVar);
-                    } else printf("%d ", abs(rand() % maxValue));
+                        printVar(randVar);
+                    } else printVar(abs(rand() % maxValue));
                 }
         }
     } else {
         for (unsigned int i = 0; i < arraySize; i++) {
-            printf("%d ", abs(rand() % maxValue));
+            printVar(abs(rand() % maxValue));
         }
     }
 
@@ -65,10 +81,11 @@ void writeBit(int &flags, bool bit, int num) {
 }
 
 
-int readFlags(int argc, char *argv[]) {
+int readFlags(int argc, char *argv[], unsigned int &arraySize) {
     int flags = 0;
     //Дефолтные значения
     writeBit(flags, true, 3);
+    arraySize = 0;
 
     if (argc > 1) {
         for (int argNumber = 1; argNumber < argc; argNumber++) {
@@ -99,6 +116,9 @@ int readFlags(int argc, char *argv[]) {
                             writeBit(flags, true, numBit);
                     }
                 }
+            } else {
+                long long tmp = atoll(argv[argNumber]);
+                arraySize = (unsigned int) tmp;
             }
         }
     }

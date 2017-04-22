@@ -1,180 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Выше 3 Мета-теги ** должны прийти в первую очередь в голове; любой другой руководитель контент *после* эти теги -->
-    <title>Bootstrap 101 Template</title>
-    <!-- Bootstrap -->
-    <link href="static/css/bootstrap.css" rel="stylesheet">
-    <link href="static/css/ask-style.css?<?php echo time(); ?>" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="static/css/font-awesome.min.css">
-    <!-- HTML5 Shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- Предупреждение: Respond.js не работает при просмотре страницы через файл:// -->
-</head>
-
-<body>
-<div class="container">
-    <header class="row">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/"><img src="static/image/logo.png">
-                    </a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <form class="search navbar-form navbar-left" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="q" placeholder="Search for...">
-                            <span class="input-group-btn">
-                           <button class="btn btn-default" type="button">Go!</button>
-                           </span>
-                        </div>
-                        <!-- /input-group -->
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="ask-question"><a href="/add.html">Задать вопрос</a></li>
-                        <li class="user-block dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">
-                                <img alt="User image" src="static/image/ava.png"> Никита Куликов<span
-                                        class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/user/settings.html">Settings</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Log out</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
-    </header>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="question">
-                <div class="row">
-                    <div class="col-md-2 question-left hidden-xs hidden-sm">
-                        <a><img src="static/image/ava.png"></a>
-                        <div class="question-author">Никита Куликов</div>
-                        <div class="rating">
+{% block content %}
+    <div class="question">
+        <div class="row">
+            <div class="col-md-2 question-left hidden-xs hidden-sm">
+                <a><img src="/static/image/ava.png"></a>
+                <div class="question-author">Никита Куликов</div>
+                <div class="rating">
                             <span>Рейтинг: <span class="fa fa-caret-down" style="color: red"></span> 10 <span
-                                        class="fa fa-caret-up" style="color: green"></span></span>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div>
-                            <h2>Как построить лунный парк?</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in commodo neque. Nulla
-                                viverra sed lorem at dignissim. Sed neque felis, malesuada feugiat ligula nec,
-                                scelerisque egestas nisl. Duis nec interdum ex. Morbi semper ante mauris, et aliquam
-                                nibh pharetra et. Curabitur vulputate bibendum pharetra. Donec elit nibh, pharetra
-                                et
-                                ullamcorper sit amet, molestie et erat. Quisque iaculis, diam at condimentum
-                                sodales,
-                                diam dolor ullamcorper magna, sit amet convallis nibh mi eu mi. Nulla quis
-                                vestibulum
-                                lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
-                                ridiculus
-                                mus. Maecenas cursus diam justo, a viverra enim tincidunt in.
-                            </p>
-                        </div>
-                        <div class="question-bottom">
+                                    class="fa fa-caret-up" style="color: green"></span></span>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div>
+                    <h2>{{ question.title }}</h2>
+                    <p>{{ question.text }}
+                    </p>
+                </div>
+                <div class="question-bottom">
                             <span class="tags">Tags: <a
-                                        href="/tags/php.html"
-                                        class="label label-default">Php</a></span>
-                        </div>
-                    </div>
+                                    href="/tag/php"
+                                    class="label label-default">Php</a></span>
                 </div>
-            </div>
-            <hr>
-            <div class="question-all">
-                <div class="question question-background">
-                    <div class="row">
-                        <div class="col-md-2 question-left hidden-xs hidden-sm">
-                            <a><img src="static/image/ava.png"></a>
-                            <div class="question-author">Никита Куликов</div>
-                            <div class="rating">
-                            <span>Рейтинг: <span class="fa fa-caret-down" style="color: red"></span> 10 <span
-                                        class="fa fa-caret-up" style="color: green"></span></span>
-                            </div>
-                        </div>
-                        <div class="col-md-9 question-right">
-                            <div class="question-text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in commodo neque. Nulla
-                                    viverra sed lorem at dignissim. Sed neque felis, malesuada feugiat ligula nec,
-                                    scelerisque egestas nisl. Duis nec interdum ex. Morbi semper ante mauris, et aliquam
-                                    nibh pharetra et. Curabitur vulputate bibendum pharetra. Donec elit nibh, pharetra
-                                    et
-                                    ullamcorper sit amet, molestie et erat. Quisque iaculis, diam at condimentum
-                                    sodales,
-                                    diam dolor ullamcorper magna, sit amet convallis nibh mi eu mi. Nulla quis
-                                    vestibulum
-                                    lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
-                                    ridiculus
-                                    mus. Maecenas cursus diam justo, a viverra enim tincidunt in.
-                                </p>
-                            </div>
-                            <div class="question-bottom"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="answer-form">
-                <form class="form-group">
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
-                    <button type="button" class="btn btn-default navbar-btn">Ответить</button>
-                </form>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div>
-                <h1>Теги:</h1>
-                <div class="tags">
-                    <span class="label label-default">Php</span>
-                    <span class="label label-default" style="background-color: red">Java</span>
-                </div>
-            </div>
-            <div>
-                <h1>Лучшие пользователи:</h1>
-                <ul class="best-users list-group">
-                    <li class="list-group-item">
-                        <span class="badge">+14</span> LionZXY <img class="crown" src="static/image/crown.png">
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">+7</span> 00x0
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">-1</span> Luser
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">-14</span> Я
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
-</div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="static/js/bootstrap.js"></script>
-</body>
+    <hr>
+    <div class="question-all full-size">
+        <div class="question question-background ">
+            <div class="row">
+                <div class="col-md-2 question-left hidden-xs hidden-sm">
+                    <a><img src="/static/image/ava.png"></a>
+                    <div class="question-author">Никита Куликов</div>
+                    <div class="rating">
+                            <span>Рейтинг: <span class="fa fa-caret-down" style="color: red"></span> 10 <span
+                                    class="fa fa-caret-up" style="color: green"></span></span>
+                    </div>
+                </div>
+                <div class="col-md-9 question-right">
+                    <div class="question-text">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in commodo neque. Nulla
+                            viverra sed lorem at dignissim. Sed neque felis, malesuada feugiat ligula nec,
+                            scelerisque egestas nisl. Duis nec interdum ex. Morbi semper ante mauris, et aliquam
+                            nibh pharetra et. Curabitur vulputate bibendum pharetra. Donec elit nibh, pharetra
+                            et
+                            ullamcorper sit amet, molestie et erat. Quisque iaculis, diam at condimentum
+                            sodales,
+                            diam dolor ullamcorper magna, sit amet convallis nibh mi eu mi. Nulla quis
+                            vestibulum
+                            lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
+                            ridiculus
+                            mus. Maecenas cursus diam justo, a viverra enim tincidunt in.
+                        </p>
+                    </div>
+                    <div class="question-bottom">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">Пометить как ответ
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="answer-form">
+        <form class="form-group">
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <button type="button" class="btn btn-default navbar-btn">Ответить</button>
+        </form>
+    </div>
 
-</html>
+{% endblock %}

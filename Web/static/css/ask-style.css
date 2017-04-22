@@ -38,7 +38,7 @@
 
 /* Колонка справа */
 .question-right {
-    padding-left: 0;
+    padding-left: 8px;
 }
 
 .tags .label {
@@ -62,7 +62,7 @@
     overflow: hidden;
     height: 150px;
     box-sizing: content-box;
-    padding: 20px 0 20px 0;
+    padding: 8px 0 8px 0;
     border: 1px solid #e3e3e3;
 }
 
@@ -84,7 +84,7 @@
     margin: 0px 0px 10px;
 }
 
-.question-text p {
+.question-text p{
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -93,6 +93,18 @@
     margin-bottom: 32px;
     text-overflow: ellipsis;
     font-size: 20px;
+}
+
+.full-size .question-right {
+    height: auto;
+}
+
+.full-size .question-background {
+    height: auto;
+}
+.full-size .question-text p{
+    -webkit-line-clamp: 100%;
+    height: auto;
 }
 
 .question-bottom {
@@ -111,6 +123,7 @@
 
 /*Вопросы слева инкремент и декремент*/
 .question-left {
+    margin: 5px;
     text-align: center;
     padding-right: 0;
 }

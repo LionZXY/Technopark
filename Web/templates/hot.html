@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Лучшие: </h1>
+<div class="question-all">
+    <div class="question question-background">
+        <div class="row">
+            <div class="col-md-2 question-left hidden-xs hidden-sm">
+                <a><img src="static/image/ava.png"></a>
+                <div class="question-author">Никита Куликов</div>
+                <div class="rating">
+                            <span>Рейтинг: <span class="fa fa-caret-down" style="color: red"></span> 10 <span
+                                    class="fa fa-caret-up" style="color: green"></span></span>
+                </div>
+            </div>
+            <div class="col-md-9 question-right">
+                <div class="question-text">
+                    <h2>Как построить лунный парк?</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in commodo neque. Nulla
+                        viverra sed lorem at dignissim. Sed neque felis, malesuada feugiat ligula nec,
+                        scelerisque egestas nisl. Duis nec interdum ex. Morbi semper ante mauris, et aliquam
+                        nibh pharetra et. Curabitur vulputate bibendum pharetra. Donec elit nibh, pharetra
+                        et
+                        ullamcorper sit amet, molestie et erat. Quisque iaculis, diam at condimentum
+                        sodales,
+                        diam dolor ullamcorper magna, sit amet convallis nibh mi eu mi. Nulla quis
+                        vestibulum
+                        lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
+                        ridiculus
+                        mus. Maecenas cursus diam justo, a viverra enim tincidunt in.
+                    </p>
+                </div>
+                <div class="question-bottom">
+                    <a href="/question.html?id=1000">answer (3)</a> <span class="tags">Tags: <a href="/tags/php.html"
+                                                                                                class="label label-default">Php</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

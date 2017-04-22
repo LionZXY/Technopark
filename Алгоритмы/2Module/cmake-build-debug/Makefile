@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.3780.121/bin/cmake/bin/cmake
+CMAKE_COMMAND = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.4073.41/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.3780.121/bin/cmake/bin/cmake -E remove -f
+RM = /home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.4073.41/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/lionzxy/Учеба/Программирование/Т�
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.3780.121/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.4073.41/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.3780.121/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/lionzxy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/171.4073.41/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,32 +123,32 @@ depend:
 	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/build
 .PHONY : 2Module/fast
 
-8.o: 8.cpp.o
+3_4.o: 3_4.cpp.o
 
-.PHONY : 8.o
+.PHONY : 3_4.o
 
 # target to build an object file
-8.cpp.o:
-	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/8.cpp.o
-.PHONY : 8.cpp.o
+3_4.cpp.o:
+	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/3_4.cpp.o
+.PHONY : 3_4.cpp.o
 
-8.i: 8.cpp.i
+3_4.i: 3_4.cpp.i
 
-.PHONY : 8.i
+.PHONY : 3_4.i
 
 # target to preprocess a source file
-8.cpp.i:
-	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/8.cpp.i
-.PHONY : 8.cpp.i
+3_4.cpp.i:
+	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/3_4.cpp.i
+.PHONY : 3_4.cpp.i
 
-8.s: 8.cpp.s
+3_4.s: 3_4.cpp.s
 
-.PHONY : 8.s
+.PHONY : 3_4.s
 
 # target to generate assembly for a file
-8.cpp.s:
-	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/8.cpp.s
-.PHONY : 8.cpp.s
+3_4.cpp.s:
+	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/3_4.cpp.s
+.PHONY : 3_4.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... 2Module"
-	@echo "... 8.o"
-	@echo "... 8.i"
-	@echo "... 8.s"
+	@echo "... 3_4.o"
+	@echo "... 3_4.i"
+	@echo "... 3_4.s"
 .PHONY : help
 
 

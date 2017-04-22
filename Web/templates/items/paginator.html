@@ -1,0 +1,20 @@
+<nav aria-label="pagination">
+    <ul class="pagination">
+        <li class="disabled">
+                        <span>
+                          <span aria-hidden="true">&laquo;</span>
+                        </span>
+        </li>
+        {% for p in paginator.page_range %}
+            {% if p == questions.number %}
+                <li class="active">
+                    {% else %}
+                <li>
+            {% endif %}
+        <a href="{% url "index" p %}">
+            {{ p }}</a>
+        </li>
+        {% endfor %}
+        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+    </ul>
+</nav>
