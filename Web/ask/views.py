@@ -5,19 +5,13 @@ from django.utils.html import escape
 from django.views.decorators.csrf import csrf_exempt
 from pygments.util import xrange
 
-questions = []
-for i in range(1, 30):
-    questions.append({
-        'title': 'title ' + str(i),
-        'id': i,
-        'text': 'text' + str(i),
-    })
+from ask.models import Question
 
 
 @csrf_exempt
 def index(request, **kwargs):
     pk = kwargs.get('pk', 1) or 1
-    data, paginator = select_page(questions, pk)
+    data, paginator = select_page(Question.objects.new().all(), pk)
     return render(request, "index.html", {'questions': data, 'paginator': paginator})
 
 
@@ -51,6 +45,10 @@ def ask(request):
     return render(request, "ask.html")
 
 
+def settings(request):
+    return render(request, "settings.html")
+
+
 def question(request, id=1):
     question = None
     try:
@@ -62,4 +60,3 @@ def question(request, id=1):
     else:
         raise Http404("Question not found")
     return render(request, "question.html", {'question': question})
-

@@ -14,6 +14,15 @@
  * 2 5
  * Вывод:
  * 3
+ *
+ * Пример 2:
+ * 4
+ * 1 12
+ * 14 21
+ * 3 10
+ * 11 15
+ * Вывод:
+ * 11
  */
 #include <iostream>
 #include <vector>
@@ -147,35 +156,46 @@ struct Line {
     }
 };
 
+
 bool isLess(const Line &p1, const Line &p2) {
-    return p1.start > p2.start;
+    return p1.start == p2.start ? p1.end > p2.end : p1.start > p2.start;
 }
 
-int getMaxLen(std::vector<Line> linesArray) {
-    int maxLen = 0;
+int getLen(std::vector<Line> linesArray) {
+    int len = 0;
     CBinaryHeap<Line, bool(const Line &, const Line &)> lines(linesArray, isLess);
 
-    while (!lines.IsEmpty()) {
-        int tmpLen = 0;
-    
-        Line last = lines.ExtractMax();
-        tmpLen = last.end - last.start;
-        //std::cout << last.start << ' ' << last.end << '\n';
-        if (!lines.IsEmpty()) {
-            Line tmp = lines.SeeMax();
-            while (tmp.start == last.end) {
-                lines.ExtractMax();
-                tmpLen += tmp.end - last.start;
-                last = tmp;
-                if (!lines.IsEmpty())
-                    tmp = lines.SeeMax();
-            }
-        }
+    if (!lines.IsEmpty()) {
+        Line prevLine = lines.ExtractMax();
+        while (!lines.IsEmpty()) {
+            Line tmp = lines.ExtractMax();
 
-        if (tmpLen > maxLen)
-            maxLen = tmpLen;
+            if (tmp.start < prevLine.start)
+                tmp.start = prevLine.start;
+
+            if (tmp.end >= prevLine.start)
+                if (tmp.start < prevLine.end) {
+                    if (tmp.end > prevLine.end) {
+                        len += tmp.start - prevLine.start;
+                        prevLine.start = prevLine.end;
+                        prevLine.end = tmp.end;
+                    } else if (tmp.end < prevLine.end) {
+                        len += tmp.start - prevLine.start;
+                        prevLine.start = tmp.end;
+                        prevLine.end = prevLine.end;
+                    } else {
+                        len += tmp.start - prevLine.start;
+                        prevLine.start = tmp.end;
+                        prevLine.end = tmp.end;
+                    }
+                } else {
+                    len += prevLine.end - prevLine.start;
+                    prevLine = tmp;
+                }
+        }
+        len += prevLine.end - prevLine.start;
     }
-    return maxLen;
+    return len;
 }
 
 int main() {
@@ -190,7 +210,7 @@ int main() {
         lines.push_back(Line(start, end));
     }
 
-    int maxLen = getMaxLen(lines);
+    int maxLen = getLen(lines);
     std::cout << maxLen;
     return 0;
 }

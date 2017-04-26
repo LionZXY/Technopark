@@ -40,8 +40,122 @@
  */
 
 #include <iostream>
+#include <cassert>
+
+int median(int x, int y, int z);
+
+int findNumber(int *array, size_t size, int index);
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    size_t n = 0;
+    int k = 0;
+    std::cin >> n >> k;
+
+    int *array = new int[n];
+    for (int i = 0; i < n; i++)
+        std::cin >> array[i];
+
+    int index = findNumber(array, n, k);
+    std::cout << index;
+
+    delete[] array;
     return 0;
+}
+
+
+void partition(int *arr, int start, int end, int median, int &i) {
+    i = start; // i - индекс последнего элемента, не большего медианы
+    int j = start + 1;
+
+    for (i = start; i <= end && arr[i] != median; i++);
+    std::swap(arr[i], arr[end]);
+    for (i = start; i <= end && arr[i] <= median; i++);
+    std::swap(arr[i], arr[start]);
+
+    for (i = start, j = start + 1; j < end;) {
+        if (arr[j] > median)
+            j++;
+        else
+            std::swap(arr[j++], arr[i++]);
+    }
+    std::swap(arr[i], arr[end]);
+}
+
+int getMedianArray(int *arr, int start, int end) {
+    int *oldArr = arr;
+    int *newArr = NULL;
+    int tmpSize = 0;
+    do {
+        tmpSize = end - start;
+        int newSize = tmpSize / 3 + (tmpSize % 3 == 0 ? 0 : 1);
+        newArr = new int[newSize];
+
+        for (int i = start + 3, j = 0; i <= end; i += 3, j++)
+            newArr[j] = median(oldArr[i], oldArr[i - 1], oldArr[i - 2]);
+
+        if (tmpSize % 3 == 2)
+            newArr[newSize - 1] = std::min(oldArr[end - 1], oldArr[end - 2]);
+        else if (tmpSize % 3 == 1)
+            newArr[newSize - 1] = oldArr[end - 1];
+
+        if (oldArr != arr)
+            delete[] oldArr;
+
+        oldArr = newArr;
+        start = 0;
+        end = newSize - 1;
+        tmpSize = newSize;
+    } while (tmpSize > 3);
+
+    int result = 0;
+    switch (tmpSize) {
+        case 3:
+            result = median(oldArr[0], oldArr[1], oldArr[2]);
+            break;
+        case 2:
+            result = std::min(oldArr[0], oldArr[1]);
+            break;
+        case 1:
+            result = oldArr[0];
+            break;
+        default:
+            assert(false);
+    }
+
+    if (oldArr != arr)
+        delete[] oldArr;
+
+    return result;
+}
+
+int findNumber(int *array, size_t size, int index) {
+    int median = 0;
+    int i = 0;
+    int start = 0;
+    int end = (int) (size - 1);
+
+    while (end - start > 1) {
+        median = getMedianArray(array, start, end);
+        partition(array, start, end, median, i);
+
+        if (index == i)
+            return median;
+
+        if (index > i) {
+            start = ++i;
+        } else end = i;
+    }
+    if(array[start] > array[end])
+        std::swap(array[start],array[end]);
+
+    assert(index == start || index == end);
+
+    return array[index];
+}
+
+int median(int x, int y, int z) {
+    if (x > y) std::swap(x, y);
+    if (y > z) std::swap(y, z);
+
+    return y;
 }

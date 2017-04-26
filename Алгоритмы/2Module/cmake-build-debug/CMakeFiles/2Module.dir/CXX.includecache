@@ -6,11 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/3_4.cpp
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/4_1.cpp
 iostream
 -
-vector
--
-assert.h
+cassert
 -
 
