@@ -57,38 +57,38 @@ include CMakeFiles/2Module.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/2Module.dir/flags.make
 
-CMakeFiles/2Module.dir/4_1.cpp.o: CMakeFiles/2Module.dir/flags.make
-CMakeFiles/2Module.dir/4_1.cpp.o: ../4_1.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/2Module.dir/4_1.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/2Module.dir/4_1.cpp.o -c /home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/4_1.cpp
+CMakeFiles/2Module.dir/8.cpp.o: CMakeFiles/2Module.dir/flags.make
+CMakeFiles/2Module.dir/8.cpp.o: ../8.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/2Module.dir/8.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/2Module.dir/8.cpp.o -c /home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/8.cpp
 
-CMakeFiles/2Module.dir/4_1.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/2Module.dir/4_1.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/4_1.cpp > CMakeFiles/2Module.dir/4_1.cpp.i
+CMakeFiles/2Module.dir/8.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/2Module.dir/8.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/8.cpp > CMakeFiles/2Module.dir/8.cpp.i
 
-CMakeFiles/2Module.dir/4_1.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/2Module.dir/4_1.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/4_1.cpp -o CMakeFiles/2Module.dir/4_1.cpp.s
+CMakeFiles/2Module.dir/8.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/2Module.dir/8.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/8.cpp -o CMakeFiles/2Module.dir/8.cpp.s
 
-CMakeFiles/2Module.dir/4_1.cpp.o.requires:
+CMakeFiles/2Module.dir/8.cpp.o.requires:
 
-.PHONY : CMakeFiles/2Module.dir/4_1.cpp.o.requires
+.PHONY : CMakeFiles/2Module.dir/8.cpp.o.requires
 
-CMakeFiles/2Module.dir/4_1.cpp.o.provides: CMakeFiles/2Module.dir/4_1.cpp.o.requires
-	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/4_1.cpp.o.provides.build
-.PHONY : CMakeFiles/2Module.dir/4_1.cpp.o.provides
+CMakeFiles/2Module.dir/8.cpp.o.provides: CMakeFiles/2Module.dir/8.cpp.o.requires
+	$(MAKE) -f CMakeFiles/2Module.dir/build.make CMakeFiles/2Module.dir/8.cpp.o.provides.build
+.PHONY : CMakeFiles/2Module.dir/8.cpp.o.provides
 
-CMakeFiles/2Module.dir/4_1.cpp.o.provides.build: CMakeFiles/2Module.dir/4_1.cpp.o
+CMakeFiles/2Module.dir/8.cpp.o.provides.build: CMakeFiles/2Module.dir/8.cpp.o
 
 
 # Object files for target 2Module
 2Module_OBJECTS = \
-"CMakeFiles/2Module.dir/4_1.cpp.o"
+"CMakeFiles/2Module.dir/8.cpp.o"
 
 # External object files for target 2Module
 2Module_EXTERNAL_OBJECTS =
 
-2Module: CMakeFiles/2Module.dir/4_1.cpp.o
+2Module: CMakeFiles/2Module.dir/8.cpp.o
 2Module: CMakeFiles/2Module.dir/build.make
 2Module: CMakeFiles/2Module.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable 2Module"
@@ -99,7 +99,7 @@ CMakeFiles/2Module.dir/build: 2Module
 
 .PHONY : CMakeFiles/2Module.dir/build
 
-CMakeFiles/2Module.dir/requires: CMakeFiles/2Module.dir/4_1.cpp.o.requires
+CMakeFiles/2Module.dir/requires: CMakeFiles/2Module.dir/8.cpp.o.requires
 
 .PHONY : CMakeFiles/2Module.dir/requires
 

@@ -2,150 +2,86 @@
 #include <algorithm>
 #include <iostream>
 #include <chrono>
+#include <cstring>
 
 using namespace std::chrono;
 #define BUFFER_SIZE 256*256*256
 unsigned int decimalBuffer[10] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000,
                                   1000000000}; // Чтобы не высчитывать каждый раз степень десятки
-#define BUFFER_START 16
 
-class UpperList {
-public:
-    int arraySize;
-
-    UpperList();
-
-    ~UpperList();
-
-    unsigned int operator[](size_t index) const;
-
-    void add(unsigned int var);
-    int
-
-private:
-    unsigned int *buffer;
-    int bufferSize;
-};
+int tmpChar[16] = {0};
 
 bool inline getVar(unsigned int &out, int &shared, int &iterrator) {
+    int pos = 0;
     out = 0;
     iterrator = 0;
 
     while ((shared = getchar_unlocked()) > ' ') {
-        out += decimalBuffer[iterrator++] * (shared - '0');
+        tmpChar[pos++] = shared;
     }
+    while (pos != 0)
+        out += decimalBuffer[iterrator++] * (tmpChar[--pos] - '0');
+    //std::cout << out << ' ';
     return shared != EOF;
 }
 
+
 void inline printVar(int var) {
-    for (int i = 9; i >= 0; i--) {
-        if (var % decimalBuffer[i] != 0)
-            putchar_unlocked(var % decimalBuffer[i] + '0');
+    int pos = 0;
+    while (var != 0) {
+        tmpChar[pos++] = var % 10 + '0';
+        var /= 10;
     }
+    while (pos != 0)
+        putchar_unlocked(tmpChar[--pos]);
     putchar_unlocked(' ');
 }
 
+
+int getByte(long long var, int number) {
+    return (int) ((var >> (number * 8)) & 255);
+}
+
+void radixSort(unsigned int *array, size_t n) {
+    int *keyArray = (int *) malloc(256 * sizeof(int));
+    unsigned int *tmpArray = (unsigned int *) malloc(n * sizeof(unsigned int));
+    for (int byteNumber = 0; byteNumber < 4; byteNumber++) {
+        memset(keyArray, 0, 256 * sizeof(int));
+
+        for (int i = 0; i < n; i++)
+            keyArray[getByte(array[i], byteNumber)]++;
+
+        int lastVar = 0;
+        for (int i = 0; i < 256; i++) {
+            int tmp = keyArray[i];
+            keyArray[i] = lastVar;
+            lastVar += tmp;
+        }
+
+        for (int i = 0; i < n; i++) {
+            int byte = getByte(array[i], byteNumber);
+            tmpArray[keyArray[byte]] = array[i];
+            keyArray[byte]++;
+        }
+
+        memmove(array, tmpArray, n * sizeof(unsigned int));
+    }
+    free(tmpArray);
+    free(keyArray);
+}
+
 int main() {
-    unsigned int x = 0;
     int shared = 0;
     int iterrator = 0;
     int pos = 0;
-    int size[256]{0};
-    UpperList **buffer = (UpperList **) calloc(BUFFER_SIZE, sizeof(UpperList *));
-    std::cout << sizeof(std::vector<unsigned int>);
+    unsigned int *buffer = (unsigned int *) malloc(25000000 * sizeof(unsigned int));
 
-    high_resolution_clock::time_point t1 = high_resolution_clock::now();
-    while (getVar(x, shared, iterrator)) {
-        if (0 == buffer[x >> 8]) {
-            buffer[x >> 8] = new UpperList();
-        }
-        buffer[x >> 8]->add(x);
-    }
-    high_resolution_clock::time_point t2 = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>(t2 - t1).count();
-    std::cout << '\n' << duration << '\n';
+    while (getVar(buffer[pos++], shared, iterrator));
+    radixSort(buffer, (size_t) pos);
 
-    pos = 0;
-    t1 = high_resolution_clock::now();
-    for (int i = 0; i < BUFFER_SIZE; i++) {
-        if (buffer[i] == 0) {}
-        else {
-            UpperList *bufferVar = buffer[i];
-            size[bufferVar->arraySize]++;
-            //printf("%lu\n", bufferVar->size());
-            switch (bufferVar->arraySize) {
-                case 1: {
-                    if (pos < 9)
-                        pos++;
-                    else {
-                        pos = 0;
-                        printVar((*bufferVar)[0]);
-                    }
-                    break;
-                }
-                case 2: {
-                    if (pos < 8)
-                        pos += 2;
-                    else {
-                        pos = 0;
-                        printVar((*bufferVar)[0] < (*bufferVar)[1] ? (*bufferVar)[0] : (*bufferVar)[1]);
-                    }
-                    break;
-                }
-                default: {
-                    std::sort(bufferVar->begin(), bufferVar->end());
-                    if (pos + bufferVar->arraySize < 10) {
-                        pos += bufferVar->arraySize;
-                    } else {
-                        pos = 10 - pos - 1;
-                        printVar((*bufferVar)[pos]);
-                        int j = 0;
-                        for (j = pos + 10; j < bufferVar->arraySize); j += 10) {
-                            printVar((*bufferVar)[j]);
-                        }
-                        pos = (int) (bufferVar->arraySize % 10);
-                    }
-                }
-            }
-        }
-    }
+    for (int i = 10; i < pos; i += 10)
+        printVar(buffer[i]);
 
-
-    t2 = high_resolution_clock::now();
-    duration = duration_cast<microseconds>(t2 - t1).count();
-    std::cout << '\n' << duration << '\n';
-
-    for (int i = 0; i < 256; i++)
-        printf("%d %d\n", i, size[i]);
-    return 0;
-}
-
-
-unsigned int &UpperList::operator[](size_t index) {
-    return buffer[index];
-}
-
-unsigned int UpperList::operator[](size_t index) const {
-    return buffer[index];
-}
-
-UpperList::UpperList() : bufferSize(BUFFER_START), arraySize(0), buffer(NULL) {
-    buffer = (unsigned int *) malloc(sizeof(unsigned int) * bufferSize);
-}
-
-UpperList::~UpperList() {
     free(buffer);
-}
-
-void UpperList::add(unsigned int var) {
-    if (bufferSize == arraySize) {
-        bufferSize *= 1.5;
-        buffer = (unsigned int *) realloc(buffer, (size_t) bufferSize);
-    }
-    buffer[arraySize++] = var;
-}
-
-inline void
-sort(_RandomAccessIterator __first, _RandomAccessIterator __last) {
-
+    return 0;
 }

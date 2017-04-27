@@ -6,9 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/4_1.cpp
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/2Module/8.cpp
+stdio.h
+-
+algorithm
+-
 iostream
 -
-cassert
+chrono
 -
 
