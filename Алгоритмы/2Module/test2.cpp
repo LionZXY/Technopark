@@ -45,6 +45,7 @@ int main() {
 
 void merge(int *arr, int firstStart, int firstEnd, int secondStart, int secondEnd) {
     int start = firstStart;
+    int end = secondEnd;
     firstStart -= start;
     firstEnd -= start;
     secondStart -= start;
@@ -54,13 +55,16 @@ void merge(int *arr, int firstStart, int firstEnd, int secondStart, int secondEn
     int *buffer = new int[size];
     std::copy(arr + start, arr + start + size, buffer);
 
-    for (int i = start; i <= secondEnd; i++) {
+    for (int i = start; i <= end; i++) {
         if (secondEnd >= secondStart)
             if (firstEnd >= firstStart) {
                 arr[i] = (buffer[firstStart] > buffer[secondStart] ? buffer[secondStart++] : buffer[firstStart++]);
             } else arr[i] = buffer[secondStart++];
         else arr[i] = buffer[firstStart++];
     }
+
+    assert(secondStart > secondEnd);
+    assert(firstStart > firstEnd);
 
     delete[] buffer;
 }

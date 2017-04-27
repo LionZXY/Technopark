@@ -47,6 +47,7 @@ int median(int x, int y, int z);
 int findNumber(int *array, size_t size, int index);
 
 int main() {
+    srand(time(NULL));
     size_t n = 0;
     int k = 0;
     std::cin >> n >> k;
@@ -63,12 +64,12 @@ int main() {
 }
 
 
-void partition(int *arr, int start, int end, int median, int &i) {
+void partition(int *arr, int start, int end, int medianIndex, int &i) {
     i = start; // i - индекс последнего элемента, не большего медианы
     int j = start + 1;
+    int median = arr[medianIndex];
 
-    for (i = start; i <= end && arr[i] != median; i++);
-    std::swap(arr[i], arr[end]);
+    std::swap(arr[medianIndex], arr[end]);
     for (i = start; i <= end && arr[i] <= median; i++);
     std::swap(arr[i], arr[start]);
 
@@ -81,6 +82,20 @@ void partition(int *arr, int start, int end, int median, int &i) {
     std::swap(arr[i], arr[end]);
 }
 
+int getMedianArray(int *arr, int start, int end) {
+    return start + abs(rand() % (end - start));
+    //int checkIndex = start + (end - start) / 2;
+    /*int pos1 = start;
+    int pos2 = checkIndex;
+    int pos3 = end;
+
+    if (arr[start] > arr[checkIndex]) std::swap(start, checkIndex);
+    if (arr[checkIndex] > arr[end]) std::swap(checkIndex, end);
+
+    return checkIndex;*/
+}
+
+/*
 int getMedianArray(int *arr, int start, int end) {
     int *oldArr = arr;
     int *newArr = NULL;
@@ -127,16 +142,18 @@ int getMedianArray(int *arr, int start, int end) {
 
     return result;
 }
-
+*/
 int findNumber(int *array, size_t size, int index) {
+    int medianIndex = 0;
     int median = 0;
     int i = 0;
     int start = 0;
     int end = (int) (size - 1);
 
     while (end - start > 1) {
-        median = getMedianArray(array, start, end);
-        partition(array, start, end, median, i);
+        medianIndex = getMedianArray(array, start, end);
+        median = array[medianIndex];
+        partition(array, start, end, medianIndex, i);
 
         if (index == i)
             return median;
@@ -145,8 +162,8 @@ int findNumber(int *array, size_t size, int index) {
             start = ++i;
         } else end = i;
     }
-    if(array[start] > array[end])
-        std::swap(array[start],array[end]);
+    if (array[start] > array[end])
+        std::swap(array[start], array[end]);
 
     assert(index == start || index == end);
 
