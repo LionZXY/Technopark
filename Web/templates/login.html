@@ -1,21 +1,30 @@
 {% extends "base.html" %}
+{% load bootstrap %}
 
 {% block content %}
-<table cols="2" class="input-group row ask-form" align="left">
-                <tr>
-                    <td class="col-md-3">Логин:</td>
-                    <td class="col-md-9"><input type="text" class="form-control" placeholder="Логин"
-                                                aria-describedby="basic-addon2"></td>
-                </tr>
-                <tr>
-                    <td class="col-md-3">Пароль:</td>
-                    <td class="col-md-9"><input type="password" class="form-control" placeholder="Пароль"
-                                                aria-describedby="basic-addon2"></td>
-                </tr>
-                <tr>
-                    <td class="col-md-3"></td>
-                    <td class="col-md-9"><button type="button" class="btn btn-default navbar-btn">Войти!</button></td>
-                </tr>
+    {% if form is not None %}
+    {% csrf_token %}
+    <form id="form_login" method="post">
+        <table cols="2" class="input-group row ask-form" align="left">
+            <tr>
+                <td class="col-md-3">Логин:</td>
+                <td id="field_login" class="col-md-9">{{ form.login }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Пароль:</td>
+                    <td id="field_password" class="col-md-9">{{ form.password }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-9">
+                    {% include "items/loader_button.html" with button_text="Войти!" %}
+                </td>
+            </tr>
 
-            </table>
+        </table>
+    </form>
+    <script src="/static/js/auth.js" type="text/javascript"></script>
+    {% else %}
+        <p>Вы уже авторизованны. <a href="/">Главная страница</a></p>
+    {% endif %}
 {% endblock %}

@@ -10,5 +10,10 @@ urlpatterns = [
     url(r'^login', views.login, name='login'),
     url(r'^signup', views.signup, name='signup'),
     url(r'^user/settings', views.settings, name='settings'),
-    url(r'ask', views.ask, name='ask')
+    url(r'ask', views.ask, name='ask'),
+
+
+    url(r'^api/v1/login', views.api_login, name='api_login'),
+    url(r'^api/v1/logout', views.api_logout, name='api_logout'),
+    url(r'^api/v1/signup', views.api_registration, name='api_signup'),
 ]

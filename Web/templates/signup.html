@@ -1,31 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table cols="2" class="input-group row ask-form" align="left">
-                <tr>
-                    <td class="col-md-3">Логин:</td>
-                    <td class="col-md-9"><input type="text" class="form-control" placeholder="Логин"
-                                                aria-describedby="basic-addon2"></td>
-                </tr>
-                <tr>
-                    <td class="col-md-3">E-mail:</td>
-                    <td class="col-md-9"><input type="email" class="form-control" placeholder="Email"
-                                                aria-describedby="basic-addon2"></td>
-                </tr>
-                <tr>
-                    <td class="col-md-3">Пароль:</td>
-                    <td class="col-md-9"><input type="password" class="form-control" placeholder="Пароль"
-                                                aria-describedby="basic-addon2"></td>
-                </tr>
-                <tr>
-                    <td class="col-md-3">Повторите пароль:</td>
-                    <td class="col-md-9"><input type="password" class="form-control" placeholder="Пароль"
-                                                aria-describedby="basic-addon2"></td>
-                </tr>
-                <tr>
-                    <td class="col-md-3"></td>
-                    <td class="col-md-9"><button type="button" class="btn btn-default navbar-btn">Зарегистироваться!</button></td>
-                </tr>
-
-            </table>
+    {% csrf_token %}
+    <form id="form_signup">
+        <table  cols="2" class="input-group row ask-form" align="left">
+            <tr>
+                <td class="col-md-3">{{ form.username.label }}</td>
+                <td class="col-md-9">{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">{{ form.email.label }}</td>
+                <td class="col-md-9">{{ form.email }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">{{ form.password.label }}</td>
+                <td class="col-md-9">{{ form.password }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">{{ form.password2.label }}</td>
+                <td class="col-md-9">{{ form.password2 }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">{{ form.avatar.label }}</td>
+                <td class="col-md-9">{{ form.avatar }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-9">
+                    {% include "items/loader_button.html" with button_text="Зарегистироваться!" %}
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script src="/static/js/signup.js" type="text/javascript"></script>
 {% endblock %}

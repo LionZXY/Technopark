@@ -1,3 +1,0 @@
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/C14Test/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/C14Test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/C14Test/cmake-build-debug/CMakeFiles/C14Test.dir

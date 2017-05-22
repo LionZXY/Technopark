@@ -1,3 +1,0 @@
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/1 Семинар/cmake-build-debug/CMakeFiles/1_.dir

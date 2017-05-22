@@ -32,3 +32,11 @@ class LikeManager(models.Manager):
         self.create(question=question, like=like)
         question.rating = self.get_rating(question.id)
         question.save()
+
+
+class UserManager(models.Manager):
+    def get_user(self, login):
+        try:
+            return self.get(login=login)
+        except self.DoesNotExist:
+            return None

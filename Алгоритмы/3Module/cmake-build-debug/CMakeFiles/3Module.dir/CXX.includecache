@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lionzxy/Учеба/Программирование/Технопарк/GitHub/Алгоритмы/3Module/4_1.cpp
+cstdio
+-
+algorithm
+-
+iostream
+-
+cassert
+-
+

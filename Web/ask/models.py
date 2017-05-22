@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+from django.contrib.sessions.models import Session
 from django.db import models
 
-from ask.managers import QuestionManager, TagManager, LikeManager
+from ask.managers import QuestionManager, TagManager, LikeManager, UserManager
 
 
 class UserProfile(models.Model):
     avatar = models.ImageField(null=True, blank=True, verbose_name=u"аватар")
     register_date = models.DateField(null=False, blank=True, auto_now_add=True, verbose_name=u"дата регистрации")
-    user = models.OneToOneField(User, null=False, blank=False, verbose_name=u"пользователь")
     rating = models.IntegerField(blank=True, default=0, verbose_name=u"рейтинг")
-    #TODO
+    user = models.OneToOneField(User, null=False, verbose_name="user")
+    objects = UserManager()
+
+    # TODO
 
     def __unicode__(self):
         return self.user.username
@@ -20,12 +23,24 @@ class UserProfile(models.Model):
         verbose_name_plural = u'пользователи'
 
 
+class Tag(models.Model):
+    title = models.ImageField(null=False, verbose_name=u"название тега")
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = u'тег'
+        verbose_name_plural = u'теги'
+
+
 class Question(models.Model):
     title = models.CharField(max_length=255, null=False, verbose_name="вопрос")
     full_question = models.CharField(max_length=8192, null=False, verbose_name="полный вопрос")
     author = models.ForeignKey(UserProfile, null=False, verbose_name="пользователь")
     date = models.DateField(null=False, blank=True, auto_now_add=True, verbose_name=u"дата создания вопроса")
     rating = models.IntegerField(default=0, blank=True, verbose_name=u"рейтинг")
+    tags = models.ManyToManyField(Tag, verbose_name="тег")
     objects = QuestionManager()
 
     def __unicode__(self):
@@ -49,27 +64,38 @@ class Answer(models.Model):
         verbose_name_plural = u'ответы'
 
 
-class Tag(models.Model):
-    title = models.ImageField(null=False, verbose_name=u"название тега")
-
-    def __unicode__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = u'тег'
-        verbose_name_plural = u'теги'
-
-
 class Like(models.Model):
     by_user = models.ForeignKey(User, null=False, verbose_name=u"пользователь")
     is_like = models.BooleanField(blank=True, default=True, verbose_name=u"лайк")
+    objects = LikeManager()
 
     def __unicode__(self):
         return "Лайк пользователя " + self.by_user.username
 
     class Meta:
+        abstract = True
         verbose_name = u'лайк'
         verbose_name_plural = u'лайки'
+
+
+class QuestionLike(Like):
+    question = models.ForeignKey(Question, null=False, verbose_name="вопрос")
+
+    def __unicode__(self):
+        return "Лайк пользователя " + self.by_user.username + " на вопрос " + self.question.title
+
+    class Meta:
+        unique_together = ("question", "by_user")
+
+
+class AnswerLike(Like):
+    answer = models.ForeignKey(Answer, null=False, verbose_name="ответ")
+
+    def __unicode__(self):
+        return "Лайк пользователя " + self.by_user.username + " на ответ " + self.answer.answer_text
+
+    class Meta:
+        unique_together = ("answer", "by_user")
 
 
 class TagTable(models.Model):
@@ -83,18 +109,5 @@ class TagTable(models.Model):
     class Meta:
         verbose_name = u"таблица тегов"
         verbose_name_plural = u"таблицы тегов"
-
-
-class LikeTable(models.Model):
-    like = models.ForeignKey(Like, null=False, verbose_name=u"лайк")
-    question = models.ForeignKey(Question, null=False, verbose_name=u"вопрос")
-    objects = LikeManager()
-
-    def __unicode__(self):
-        return str(self.like) + str(self.question)
-
-    class Meta:
-        verbose_name = u"таблица лайков"
-        verbose_name_plural = u"таблицы лайков"
 
 # Create your models here.
