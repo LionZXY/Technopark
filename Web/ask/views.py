@@ -85,6 +85,7 @@ def question(request, id=1):
                                              'answers': qst.answers.all(),
                                              'form': AnswerForm()})
 
+
 def login(request):
     url = request.POST.get('continue')
     if request.user.is_authenticated():
@@ -254,37 +255,40 @@ def api_ask(request):
 
 def api_like(request):
     is_questions = request.POST.get("question", True)
-    question_id = request.POST.get("question_id", None)
+    id = request.POST.get("id", None)
     is_like = request.POST.get("is_like", True)
-    answer_id = request.POST.get("answer_id", None)
+    rating = 0
 
     if not request.user.is_authenticated():
         return JsonResponse({'status': 'error',
                              'message': 'Эта операция доступна только авторизованным пользователям'})
 
+    if not id:
+        return JsonResponse({'status': 'error',
+                             'message': 'Отсутсвует id'})
+
     if is_questions:
-        if not question_id:
-            return JsonResponse({'status': 'error',
-                                 'message': 'Отсутсвует id вопроса'})
         try:
-            question = Question.objects.get(id=question_id)
+            question = Question.objects.get(id=id)
         except Question.DoesNotExist:
             return JsonResponse({'status': 'error',
                                  'message': 'Такого вопроса не существует'})
         like, created = QuestionLike.objects.get_or_create(question=question, by_user=request.user)
+        rating = question.rating
     else:
-        if not answer_id:
-            return JsonResponse({'status': 'error',
-                                 'message': 'Отсутсвует id ответа'})
         try:
-            answer = Answer.objects.get(id=answer_id)
+            answer = Answer.objects.get(id=id)
         except Question.DoesNotExist:
             return JsonResponse({'status': 'error',
                                  'message': 'Такого ответа не существует'})
         like, created = AnswerLike.objects.get_or_create(answer=answer, by_user=request.user)
+        rating = answer.rating
     like.is_like = is_like
     like.save()
-    return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'ok',
+                         'answer': {
+                             'rating': rating
+                         }})
 
 
 def api_answer(request):

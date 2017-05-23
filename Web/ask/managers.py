@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models import Count
+from django.template.loaders import cached
+from django.core.cache import caches, cache
 
 
 class QuestionManager(models.Manager):
@@ -17,6 +20,9 @@ class TagManager(models.Manager):
 
     def by_tag(self, tag_str):
         return self.filter(title=tag_str).first().questions.all()
+
+    def popular(self):
+        return cache.get('test')
 
 
 class LikeManager(models.Manager):

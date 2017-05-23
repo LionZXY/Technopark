@@ -1,15 +1,20 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.views.generic import FormView
 
 from ask.models import UserProfile, Question, Answer
 
 
-class LoginForm(forms.Form):
+class LoginForm(forms.ModelForm):
     login = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+    def clean_login(self):
+        login = self
+
     class Meta:
+        model = User
         fields = ('login', 'password',)
 
 

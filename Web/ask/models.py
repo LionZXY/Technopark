@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from django.contrib.auth.models import User, AbstractUser
 from django.contrib.sessions.models import Session
 from django.db import models
+from django.utils.timezone import utc
 
 from ask.managers import QuestionManager, LikeManager, UserManager, TagManager
 
@@ -43,6 +46,11 @@ class Question(models.Model):
     rating = models.IntegerField(default=0, blank=True, verbose_name=u"рейтинг")
     tags = models.ManyToManyField(Tag, related_name='questions', verbose_name="тег")
     objects = QuestionManager()
+
+    def is_actuals(self):
+        now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        month_dif = (now - self.date).month
+        return month_dif > 2
 
     def __unicode__(self):
         return self.title

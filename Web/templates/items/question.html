@@ -1,11 +1,11 @@
-<div class="question question-background" data-id="{{ qst.id }}">
+<div class="qst question question-background" data-id="{{ qst.id }}">
     <div class="row">
         <div class="col-md-2 question-left hidden-xs hidden-sm">
             <a><img src="/static/image/ava.png"></a>
             <div class="question-author">{{ qst.by_user.name }}</div>
             <div class="rating">
                             <span>Рейтинг: <span class="fa fa-caret-down"
-                                                 style="color: red"></span> {{ qst.rating }} <span
+                                                 style="color: red"></span> <span class="rating">{{ qst.rating }}</span> <span
                                     class="fa fa-caret-up" style="color: green"></span></span>
             </div>
         </div>
@@ -16,7 +16,7 @@
                 </p>
             </div>
             <div class="question-bottom">
-                <a href="/question/{{ qst.id }}">answer ({{ qst.answers|length }})</a> <span class="tags">Tags:
+                <a href="/question/{{ qst.id }}">answer ({{ qst.answers.count }})</a> <span class="tags">Tags:
                 {% for tag in qst.tags.all %}
                     <a href="{% url 'tag' tag.title %}" class="label label-default">{{ tag.title }}</a>
                 {% endfor %}

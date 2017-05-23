@@ -20,7 +20,7 @@ def save_tag(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=QuestionLike, dispatch_uid='save_rating_update')
-def save_tag(sender, instance, created, **kwargs):
+def save_question_like(sender, instance, created, **kwargs):
     like = instance
     if like.is_like:
         like.question.rating += 1
@@ -29,7 +29,7 @@ def save_tag(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=AnswerLike, dispatch_uid='save_rating_answer_update')
-def save_tag(sender, instance, created, **kwargs):
+def save_answer_like(sender, instance, created, **kwargs):
     like = instance
     if like.is_like:
         like.answer.rating += 1

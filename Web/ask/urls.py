@@ -5,7 +5,7 @@ from ask import views
 urlpatterns = [
     url(r'^(?:(?P<pk>\d+)/)?$', views.index, name='index'),
     url(r'^hot', views.hot, name='hot'),
-    url(r'^tag/(?P<tag_id>([a-zA-Zа-яА-Я ])+)?$', views.tag, name='tag'),
+    url(r'^tag/(?P<tag_id>([a-zA-Zа-яА-Я0-9. ])+)?$', views.tag, name='tag'),
     url(r'^question/(?P<id>\d+)?$', views.question, name='question'),
     url(r'^user/settings', views.settings, name='settings'),
     url(r'^ask', views.ask, name='ask'),
