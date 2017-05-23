@@ -6,21 +6,18 @@ $("#button_login").click(function () {
     $(".showbox").css("display", "block");
     $("#button_login").css("display", "none");
     $.ajax({
-        url: '/api/v1/login/',
+        url: '/api/v1/ask/',
         type: 'POST',
-        data: $("#form_login").serialize(),
+        data: $("#form_ask").serialize(),
         success: function (data) {
             if (data.status == 'ok') {
                 console.log("OK");
                 console.log(data);
-                console.log(data.headers);
-                console.log(window.location.hostname);
 
-                redirect(findGetParameter("continue"))
+                redirect("/question/"+data.answer.id)
+
             } else {
-                notifyAboutError(data.message);
-                $("field_login").addClass("has-error");
-                $("field_password").addClass("has-error");
+                notifyAboutError(data.message, data.fields);
                 console.log(data)
             }
             $(".showbox").css("display", "none");
@@ -34,4 +31,3 @@ $("#button_login").click(function () {
         }
     })
 });
-

@@ -3,14 +3,14 @@ from django.contrib.auth.models import User, AbstractUser
 from django.contrib.sessions.models import Session
 from django.db import models
 
-from ask.managers import QuestionManager, TagManager, LikeManager, UserManager
+from ask.managers import QuestionManager, LikeManager, UserManager, TagManager
 
 
 class UserProfile(models.Model):
     avatar = models.ImageField(null=True, blank=True, verbose_name=u"аватар")
     register_date = models.DateField(null=False, blank=True, auto_now_add=True, verbose_name=u"дата регистрации")
     rating = models.IntegerField(blank=True, default=0, verbose_name=u"рейтинг")
-    user = models.OneToOneField(User, null=False, verbose_name="user")
+    user = models.OneToOneField(User, related_name='userprofile', null=False, verbose_name="user")
     objects = UserManager()
 
     # TODO
@@ -24,7 +24,8 @@ class UserProfile(models.Model):
 
 
 class Tag(models.Model):
-    title = models.ImageField(null=False, verbose_name=u"название тега")
+    title = models.CharField(max_length=50, null=False, verbose_name=u"название тега")
+    objects = TagManager()
 
     def __unicode__(self):
         return self.title
@@ -40,7 +41,7 @@ class Question(models.Model):
     author = models.ForeignKey(UserProfile, null=False, verbose_name="пользователь")
     date = models.DateField(null=False, blank=True, auto_now_add=True, verbose_name=u"дата создания вопроса")
     rating = models.IntegerField(default=0, blank=True, verbose_name=u"рейтинг")
-    tags = models.ManyToManyField(Tag, verbose_name="тег")
+    tags = models.ManyToManyField(Tag, related_name='questions', verbose_name="тег")
     objects = QuestionManager()
 
     def __unicode__(self):
@@ -53,8 +54,9 @@ class Question(models.Model):
 
 class Answer(models.Model):
     answer_text = models.CharField(max_length=8192, null=False, verbose_name="ответ")
+    rating = models.IntegerField(default=0, blank=True, verbose_name=u"рейтинг")
     by_user = models.ForeignKey(UserProfile, null=False, verbose_name="пользователь")
-    question = models.ForeignKey(Question, null=False, verbose_name="вопрос")
+    question = models.ForeignKey(Question, related_name='answers', null=False, verbose_name="вопрос")
 
     def __unicode__(self):
         return self.answer_text
@@ -96,18 +98,5 @@ class AnswerLike(Like):
 
     class Meta:
         unique_together = ("answer", "by_user")
-
-
-class TagTable(models.Model):
-    question = models.ForeignKey(Question, null=False, verbose_name=u"вопрос")
-    tag = models.ForeignKey(Tag, null=False, verbose_name=u"тег")
-    objects = TagManager()
-
-    def __unicode__(self):
-        return str(self.tag) + str(self.question)
-
-    class Meta:
-        verbose_name = u"таблица тегов"
-        verbose_name_plural = u"таблицы тегов"
 
 # Create your models here.

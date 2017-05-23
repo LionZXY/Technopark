@@ -10,8 +10,13 @@ class QuestionManager(models.Manager):
 
 
 class TagManager(models.Manager):
-    def by_tag(self, tag):
-        return self.filter(tag__title=tag).values_list('question').all()
+    def add_qst(self, tag_str, question):
+        tag, created = self.get_or_create(title=tag_str)
+        question.tags.add(tag)
+        return tag
+
+    def by_tag(self, tag_str):
+        return self.filter(title=tag_str).first().questions.all()
 
 
 class LikeManager(models.Manager):

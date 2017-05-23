@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    {% if valid %}
+        <p>Вы успешно вышли</p>
+    {% else %}
+        <p>Не удалось сделать выход. Вы точно были авторизованны?</p>
+    {% endif %}
+{% endblock %}

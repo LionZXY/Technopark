@@ -25,21 +25,27 @@
                     <!-- /input-group -->
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="ask-question"><a href="{% url "ask" %}">Задать вопрос</a></li>
-                    <li class="user-block dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">
-                            <img alt="User image" src="/static/image/ava.png"> Никита Куликов<span
-                                class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url "settings" %}">Settings</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Выйти</a>
-                            </li>
-                        </ul>
-                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="ask-question"><a href="{% url "ask" %}">Задать вопрос</a></li>
+                        <li class="user-block dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                <img alt="User image"
+                                     src="/static/image/ava.png"> {{ request.user.first_name }} {{ request.user.last_name }}<span
+                                    class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url "settings" %}">Settings</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'logout' %}">Выйти</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="ask-question"><a href="{% url "signup" %}">Зарегистрироваться</a></li>
+                        <li class="ask-question"><a href="{% url "login" %}">Войти</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

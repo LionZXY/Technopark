@@ -1,39 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% csrf_token %}
+    {% if request.user.is_authenticated %}
+        <h1>Новый вопрос</h1>
+        <form id="form_ask">
+            <table cols="2" class="input-group row ask-form" align="left">
+                <tr>
+                    <td class="col-md-3">Вопрос</td>
+                    <td class="col-md-9">{{ form.title }}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-3">{{ form.text.label }}</td>
+                    <td class="col-md-9">{{ form.text }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-3">{{ form.tags.label }}</td>
+                    <td class="col-md-9">{{ form.tags }}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-3"></td>
+                    <td class="col-md-9">
+                        {% include "items/loader_button.html" with button_text="Спросить!" %}
+                    </td>
+                </tr>
 
-<h1>Новый вопрос</h1>
-<div class="alert alert-danger">
-    <strong>Ощибка!111одын!11</strong> Ошибка доступа к базе данных!.
-</div>
-<table cols="2" class="input-group row ask-form" align="left">
-    <tr>
-        <td class="col-md-3">Вопрос:</td>
-        <td class="col-md-9"><input type="text" class="form-control" placeholder="Введите вопрос"
-                                    aria-describedby="basic-addon2"></td>
-    </tr>
-    <tr>
-        <td class="col-md-3">Текст вопроса:</td>
-        <td class="col-md-9">
-            <div class="has-error"><textarea rows="6" class="form-control"
-                                             placeholder="Распишите тут свой вопрос подробнее"
-                                             aria-describedby="basic-addon2"></textarea>
-                <label class="control-label" for="inputError">Вопрос не может быть пустым!</label></div>
-        </td>
-    </tr>
-    <tr>
-        <td class="col-md-3">Теги:</td>
-        <td class="col-md-9"><input type="text" class="form-control"
-                                    placeholder="Укажите теги через запятую"
-                                    aria-describedby="basic-addon2"></td>
-    </tr>
-    <tr>
-        <td class="col-md-3"></td>
-        <td class="col-md-9">
-            <button type="button" class="btn btn-default navbar-btn">Спросить!</button>
-        </td>
-    </tr>
-
-</table>
-
+            </table>
+        </form>
+        <script src="/static/js/ask.js" type="text/javascript"></script>
+    {% else %}
+        <p>Страница доступна только авторизированным пользователям</p>
+    {% endif %}
 {% endblock %}

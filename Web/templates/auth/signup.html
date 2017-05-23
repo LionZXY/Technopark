@@ -5,6 +5,14 @@
     <form id="form_signup">
         <table  cols="2" class="input-group row ask-form" align="left">
             <tr>
+                <td class="col-md-3">{{ form.first_name.label }}</td>
+                <td class="col-md-9">{{ form.first_name }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">{{ form.last_name.label }}</td>
+                <td class="col-md-9">{{ form.last_name }}</td>
+            </tr>
+            <tr>
                 <td class="col-md-3">{{ form.username.label }}</td>
                 <td class="col-md-9">{{ form.username }}</td>
             </tr>
@@ -32,5 +40,6 @@
             </tr>
         </table>
     </form>
+
     <script src="/static/js/signup.js" type="text/javascript"></script>
 {% endblock %}

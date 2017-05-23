@@ -1,74 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="question">
+    <div id="main-question" class="question" data-id="{{ question.id }}">
         <div class="row">
             <div class="col-md-2 question-left hidden-xs hidden-sm">
                 <a><img src="/static/image/ava.png"></a>
                 <div class="question-author">Никита Куликов</div>
                 <div class="rating">
-                            <span>Рейтинг: <span class="fa fa-caret-down" style="color: red"></span> 10 <span
+                            <span>Рейтинг: <span class="fa fa-caret-down"
+                                                 style="color: red"></span> {{ question.rating }} <span
                                     class="fa fa-caret-up" style="color: green"></span></span>
                 </div>
             </div>
             <div class="col-md-9">
                 <div>
                     <h2>{{ question.title }}</h2>
-                    <p>{{ question.text }}
+                    <p>{{ question.full_question }}
                     </p>
                 </div>
                 <div class="question-bottom">
-                            <span class="tags">Tags: <a
-                                    href="/tag/php"
-                                    class="label label-default">Php</a></span>
+                        <span class="tags">Tags:
+                            {% for tag in tags %}
+                                <a href="{% url 'tag' tag.title %}" class="label label-default">{{ tag.title }}</a>
+                            {% endfor %}
+                        </span>
                 </div>
             </div>
         </div>
     </div>
     <hr>
     <div class="question-all full-size">
-        <div class="question question-background ">
-            <div class="row">
-                <div class="col-md-2 question-left hidden-xs hidden-sm">
-                    <a><img src="/static/image/ava.png"></a>
-                    <div class="question-author">Никита Куликов</div>
-                    <div class="rating">
-                            <span>Рейтинг: <span class="fa fa-caret-down" style="color: red"></span> 10 <span
-                                    class="fa fa-caret-up" style="color: green"></span></span>
-                    </div>
-                </div>
-                <div class="col-md-9 question-right">
-                    <div class="question-text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in commodo neque. Nulla
-                            viverra sed lorem at dignissim. Sed neque felis, malesuada feugiat ligula nec,
-                            scelerisque egestas nisl. Duis nec interdum ex. Morbi semper ante mauris, et aliquam
-                            nibh pharetra et. Curabitur vulputate bibendum pharetra. Donec elit nibh, pharetra
-                            et
-                            ullamcorper sit amet, molestie et erat. Quisque iaculis, diam at condimentum
-                            sodales,
-                            diam dolor ullamcorper magna, sit amet convallis nibh mi eu mi. Nulla quis
-                            vestibulum
-                            lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
-                            ridiculus
-                            mus. Maecenas cursus diam justo, a viverra enim tincidunt in.
-                        </p>
-                    </div>
-                    <div class="question-bottom">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox">Пометить как ответ
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% if answers|length > 0 %}
+            {% for answer in answers %}
+                {% include 'items/answer.html' with answer=answer %}
+            {% endfor %}
+        {% else %}
+            <p>Пока еще никто не оставил ответ на этот вопрос. Будь первым!</p>
+        {% endif %}
     </div>
+    <hr>
     <div class="answer-form">
-        <form class="form-group">
-            <textarea class="form-control" rows="5" id="comment"></textarea>
-            <button type="button" class="btn btn-default navbar-btn">Ответить</button>
+        <form id="form_answer" class="form-group">
+            {{ form.text }}
+            {% include 'items/loader_button.html' with button_text="Ответить" %}
         </form>
     </div>
 
+    <script src="/static/js/answer.js" type="text/javascript"></script>
 {% endblock %}

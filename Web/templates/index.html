@@ -5,29 +5,7 @@
     <h1>Вопросы: </h1>
     <div class="question-all">
         {% for qst in questions %}
-            <div class="question question-background">
-                <div class="row">
-                    <div class="col-md-2 question-left hidden-xs hidden-sm">
-                        <a><img src="/static/image/ava.png"></a>
-                        <div class="question-author">{{ qst.by_user.name }}</div>
-                        <div class="rating">
-                            <span>Рейтинг: <span class="fa fa-caret-down" style="color: red"></span> 10 <span
-                                    class="fa fa-caret-up" style="color: green"></span></span>
-                        </div>
-                    </div>
-                    <div class="col-md-9 question-right">
-                        <div class="question-text">
-                            <h2>{{ qst.title }}</h2>
-                            <p>{{ qst.full_question }}
-                            </p>
-                        </div>
-                        <div class="question-bottom">
-                            <a href="/question/{{ qst.id }}">answer (3)</a> <span class="tags">Tags: <a href=""
-                                                                                                        class="label label-default">Php</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include 'items/question.html' with qst=qst %}
         {% empty %}
             <h2>Вопросов пока нет :( Но ты можешь его <a href="{% url "ask" %}">задать</a>!</h2>
         {% endfor %}

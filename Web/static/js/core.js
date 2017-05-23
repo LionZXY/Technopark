@@ -71,3 +71,21 @@ function findGetParameter(parameterName) {
         });
     return result;
 }
+
+function notifyAboutError(message_error, invalid_ids) {
+    invalid_ids = typeof invalid_ids !== 'undefined' ? invalid_ids : [];
+    var content = $(".main-content");
+    if (content.has(".alert"))
+        content.find(".alert").remove();
+    content.prepend($(' <div class="alert alert-danger"> <strong>Ошибка</strong> ' + message_error + '. </div>'));
+    $(".form-control").removeClass("has-error");
+
+    invalid_ids.forEach(function (str) {
+        $("#id_" + str).parent().addClass("has-error")
+    })
+}
+function notifySucsess() {
+    var content = $(".main-content");
+    if (content.has(".alert"))
+        content.find(".alert").remove();
+}

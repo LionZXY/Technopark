@@ -1,26 +1,26 @@
 /**
- * Created by lionzxy on 22.05.17.
+ * Created by lionzxy on 23.05.17.
  */
 
 $("#button_login").click(function () {
     $(".showbox").css("display", "block");
     $("#button_login").css("display", "none");
+    var form = $("#form_answer").serialize();
+    form += '&question_id=' + $("#main-question")[0].dataset.id;
+    console.log(form);
     $.ajax({
-        url: '/api/v1/login/',
+        url: '/api/v1/answer/',
         type: 'POST',
-        data: $("#form_login").serialize(),
+        data: form,
         success: function (data) {
             if (data.status == 'ok') {
                 console.log("OK");
                 console.log(data);
-                console.log(data.headers);
-                console.log(window.location.hostname);
+                notifySucsess();
+                //TODO update data
 
-                redirect(findGetParameter("continue"))
             } else {
-                notifyAboutError(data.message);
-                $("field_login").addClass("has-error");
-                $("field_password").addClass("has-error");
+                notifyAboutError(data.message, data.fields);
                 console.log(data)
             }
             $(".showbox").css("display", "none");
@@ -34,4 +34,3 @@ $("#button_login").click(function () {
         }
     })
 });
-
